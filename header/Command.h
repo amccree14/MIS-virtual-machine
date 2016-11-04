@@ -54,7 +54,11 @@ class Command
 			// addParam() is non-virtual, because it will work the same way
 			//		no matter what. Consider making it static (check
 			//		how that interacts with multiple objects).
-		void addParam();				// add another param to the oplist
+			
+		void addParam(OP_Param_Base*);		// add another param to the oplist.
+											//  Takes a pointer and converts it
+											//	to a shared_ptr to be placed
+											//	in the oplist vector.
 		
 		
 		virtual void execute();			// calls op and passes it parameters
