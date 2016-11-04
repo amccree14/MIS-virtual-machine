@@ -95,69 +95,69 @@ class C_ADD: public Command
 	public:
 		C_ADD(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_ADD* parse(string s);	
 };
 class C_SUB: public Command
 {
 	public:
 		C_SUB(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_SUB* parse(string s);	
 };
 class C_MUL: public Command
 {
 	public:
 		C_MUL(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_MUL* parse(string s);	
 };
 class C_DIV: public Command
 {
 	public:
 		C_DIV(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_DIV* parse(string s);	
 };
 class C_ASSIGN: public Command
 {
 	public:
 		C_ASSIGN(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_ASSIGN* parse(string s);	
 };
 class C_OUT: public Command
 {
 	public:
 		C_OUT(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_OUT* parse(string s);	
 };
 class C_SET_STR_CHAR: public Command
 {
 	public:
 		C_SET_STR_CHAR(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_SET_STR_CHAR* parse(string s);	
 };
 class C_GET_STR_CHAR: public Command
 {
 	public:
 		C_GET_STR_CHAR(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_GET_STR_CHAR* parse(string s);	
 };
 class C_LABEL: public Command
 {
 	public:
 		C_LABEL(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_LABEL* parse(string s);	
 };
 class C_SLEEP: public Command{
 	public:
 		C_SLEEP(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_SLEEP* parse(string s);	
 };
 
 
@@ -179,7 +179,7 @@ class C_JMP: public Command
 	public:
 		C_JMP(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_JMP* parse(string s);	
 };
 class C_JMP_ZNZ: public C_JMP
 {
@@ -187,7 +187,7 @@ class C_JMP_ZNZ: public C_JMP
 			// basic constructor to set the boolean
 		C_JMP_ZNZ(OP_System_Data* data, bool b):C_JMP(data), side(b){}
 		execute();
-		Command* parse(string s);	
+		C_JMP_ZNZ* parse(string s);	
 };
 class C_JMP_GTLTE: public C_JMP
 {
@@ -195,7 +195,7 @@ class C_JMP_GTLTE: public C_JMP
 			// basic constructor to set the boolean
 		C_JMP_GTLTE(OP_System_Data* data, bool b):C_JMP(data), side(b){}
 		execute();
-		Command* parse(string s);	
+		C_JMP_GTLTE* parse(string s);	
 };
 class C_JMP_GTELT: public C_JMP
 {
@@ -203,7 +203,7 @@ class C_JMP_GTELT: public C_JMP
 			// basic constructor to set the boolean
 		C_JMP_GTELT(OP_System_Data* data, bool b):C_JMP(data), side(b){}
 		execute();
-		Command* parse(string s);	
+		C_JMP_GTELT* parse(string s);	
 };
 
 
@@ -215,7 +215,7 @@ class C_VAR: public Command
 	public:
 		C_VAR(OP_System_Data* data):Command(data){}
 		execute();
-		Command* parse(string s);	
+		C_VAR* parse(string s);	
 };
 
 
