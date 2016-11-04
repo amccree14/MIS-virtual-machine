@@ -43,7 +43,8 @@ class Command
 											//	objects in an OP_List vector
 		
 	
-		std::vector<OP_Param_Base> oplist;	// vector of operands for function
+											// vector of operands for function
+		std::vector<std::shared_ptr<OP_Param_Base>> oplist;
 		
 		OP_System_Data* mdata;
 											

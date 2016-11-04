@@ -21,6 +21,8 @@
 template <class A>
 class Variable: public OP_Param_Base<A>
 {
+	Variable(A x):OP_Param_Base(x){};
+	
 	A getValue();			// this should retrieve the value from an indexed
 							// location in the variable map
 	

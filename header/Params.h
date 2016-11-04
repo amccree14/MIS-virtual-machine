@@ -27,6 +27,8 @@
 template <class A>
 class Params: public OP_Param_Base<A>
 {
+	Params(A x):OP_Param_Base(x){};
+	
 	A getValue();			// return value
 	void setValue(A);		// this should just throw an exception
 };

@@ -45,7 +45,7 @@ class OP_Param_Base
 
 		
 		
-	private:		
+	protected:		
 		A value;		// value stored within the param or variable
 						//	- For param, it's an actual value
 						//	- For variable, it's the variable index
