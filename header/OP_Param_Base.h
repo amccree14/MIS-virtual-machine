@@ -55,5 +55,8 @@ class OP_Param_Base
 };
 
 
+typedef OP_Param_Base::OP_TYPE PARAM_TYPE;	// typedef for easier enum access
+
+
 
 #endif
