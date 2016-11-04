@@ -34,15 +34,6 @@ class Command
 {
 		// protected member variables for inheritance to derived classes
 	protected:
-		// (int)(*op)(void*);		// if we need to pass different types,
-									//	then we can pass void* and cast it
-									
-		(int)(*op)(std::vector<std::shared_ptr<OP_Param_Base>>);	
-											// otherwise this is enough, since
-											//	we can store Variable and Params
-											//	objects in an OP_List vector
-		
-	
 											// vector of operands for function
 		std::vector<std::shared_ptr<OP_Param_Base>> oplist;
 		
@@ -54,8 +45,6 @@ class Command
 		Command(OP_System_Data* data):mdata(data){}		// basic constructor
 														// sets mdata pointer
 		
-		enum class PERRROR{"SUCCESS","TOO_FEW","TOO_MANY"};
-		
 			// !! - These functions all throw exceptions if failures occur,
 			//		so please use try-catch blocks around them
 			
@@ -65,7 +54,7 @@ class Command
 			// addParam() is non-virtual, because it will work the same way
 			//		no matter what. Consider making it static (check
 			//		how that interacts with multiple objects).
-		PERROR addParam();				// add another param to the oplist
+		void addParam();				// add another param to the oplist
 		
 		
 		virtual void execute();			// calls op and passes it parameters
