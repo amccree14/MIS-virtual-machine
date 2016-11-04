@@ -13,39 +13,44 @@
 
 
 // NOTE: this file should be replaced with a list of macro definitions
+#define MIN_NUM 1
+#define TWO 2
+#define THREE 3
+#define TWELVE 12
+#define MAX_NUM 13
 
-enum class MAXPARAM
+class MAXPARAM
 {
-	ADD = 13,
-	SUB = 3,
-	MUL = 13,
-	DIV = 3,
-	ASSIGN = 2,
-	OUT = 12,
-	SET_STR_CHAR = 3,
-	GET_STR_CHAR = 3,
-	LABEL = 1,
-	JMP = 1,
-	JMP_ZNZ = 2,
-	JMP_GTLT = 3,
-	SLEEP = 1
+	ADD = MAX_NUM,
+	SUB = THREE,
+	MUL = MAX_NUM,
+	DIV = THREE,
+	ASSIGN = TWO,
+	OUT = TWE;VE,
+	SET_STR_CHAR = THREE,
+	GET_STR_CHAR = THREE,
+	LABEL = MIN_NUM,
+	JMP = MIN_NUM,
+	JMP_ZNZ = TWO,
+	JMP_GTLT = THREE,
+	SLEEP = MIN_NUM
 };
 
-enum class MINPARAM
+class MINPARAM
 {
-	ADD = 3,
-	SUB = 3,
-	MUL = 3,
-	DIV = 3,
-	ASSIGN = 2,
-	OUT = 1,
-	SET_STR_CHAR = 3,
-	GET_STR_CHAR = 3,
-	LABEL = 1,
-	JMP = 1,
-	JMP_ZNZ = 2,
-	JMP_GTLT = 3,
-	SLEEP = 1
+	ADD = THREE,
+	SUB = THREE,
+	MUL = THREE,
+	DIV = THREE,
+	ASSIGN = TWO,
+	OUT = MIN_NUM,
+	SET_STR_CHAR = THREE,
+	GET_STR_CHAR = THREE,
+	LABEL = MIN_NUM,
+	JMP = MIN_NUM,
+	JMP_ZNZ = TWO,
+	JMP_GTLT = THREE,
+	SLEEP = MIN_NUM
 };
 
 
