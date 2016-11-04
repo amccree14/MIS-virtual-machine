@@ -11,6 +11,9 @@
 *		each command operation can accept in the form of two enumerated lists.
 ******************/
 
+
+// NOTE: this file should be replaced with a list of macro definitions
+
 enum class MAXPARAM
 {
 	ADD = 13,
