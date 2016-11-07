@@ -14,7 +14,9 @@ void C_ADD::execute()
 {
 
 		// temporary value for storing the sum of our parameters
-	double temp = 0;
+		// maybe we should use auto for our temp type since the ADD command should be able
+		//to take in both int and float
+	/* auto */ double temp = 0;
 	
 		// loop through the vector and add all parameters (except the first
 		//	one) together
@@ -34,8 +36,9 @@ void C_ADD::execute()
 
 void C_SUB::execute()
 {
+	
 
-	double temp = 0;
+	auto temp;
 	// subtract 3rd param from second param
 	temp = opList[1] - opList[2];
 
@@ -48,7 +51,7 @@ void C_SUB::execute()
 void C_DIV::execute()
 {
 
-	double temp = 0;
+	auto temp;
 	// If second param is zero throw exception/error
 	// divide 3rd param from second param
 	temp = opList[1] / opList[2];
@@ -59,6 +62,22 @@ void C_DIV::execute()
 	
 }
 
+void C_ASSIGN::execute()
+{
+	// storing second parameter into firs 
+	oplist[0].setValue(opList[1]);
+	
+	return;	
+	
+}
 
-
-
+void C_OUT::execute() {
+		// start at begininng of oplist to print out every value 
+		for (int i = 0; i < oplist.size() - 1; ++i)
+	{
+		std::cout << oplist[i].getvalue() << endl;
+	}
+	
+	return;
+}
+	
