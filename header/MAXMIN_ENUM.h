@@ -8,44 +8,52 @@
 *
 * Details:
 *	- This file provides MAX and MIN values for the number of parameters
-*		each command operation can accept in the form of two enumerated lists.
+*		each command operation can accept in the form of two enumerated lists
+*		encapsulated within two structs. These are basically just constants.
 ******************/
 
 
-// NOTE: this file should be replaced with a list of macro definitions
+// NOTE: changing this to struct + c-style enum for scoping and ease-of-use.
+//			Access as follows: MAXPARAM::ADD, MINPARAM::ADD and so-on.
 
-enum class MAXPARAM
+struct MAXPARAM
 {
-	ADD = 13,
-	SUB = 3,
-	MUL = 13,
-	DIV = 3,
-	ASSIGN = 2,
-	OUT = 12,
-	SET_STR_CHAR = 3,
-	GET_STR_CHAR = 3,
-	LABEL = 1,
-	JMP = 1,
-	JMP_ZNZ = 2,
-	JMP_GTLT = 3,
-	SLEEP = 1
+	enum
+	{
+		ADD = 13,
+		SUB = 3,
+		MUL = 13,
+		DIV = 3,
+		ASSIGN = 2,
+		OUT = 12,
+		SET_STR_CHAR = 3,
+		GET_STR_CHAR = 3,
+		LABEL = 1,
+		JMP = 1,
+		JMP_ZNZ = 2,
+		JMP_GTLT = 3,
+		SLEEP = 1
+	};
 };
 
-enum class MINPARAM
-{
-	ADD = 3,
-	SUB = 3,
-	MUL = 3,
-	DIV = 3,
-	ASSIGN = 2,
-	OUT = 1,
-	SET_STR_CHAR = 3,
-	GET_STR_CHAR = 3,
-	LABEL = 1,
-	JMP = 1,
-	JMP_ZNZ = 2,
-	JMP_GTLT = 3,
-	SLEEP = 1
+struct MINPARAM
+{	
+	enum
+	{
+		ADD = 3,
+		SUB = 3,
+		MUL = 3,
+		DIV = 3,
+		ASSIGN = 2,
+		OUT = 1,
+		SET_STR_CHAR = 3,
+		GET_STR_CHAR = 3,
+		LABEL = 1,
+		JMP = 1,
+		JMP_ZNZ = 2,
+		JMP_GTLT = 3,
+		SLEEP = 1
+	};
 };
 
 
