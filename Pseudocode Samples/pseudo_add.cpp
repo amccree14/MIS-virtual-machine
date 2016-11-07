@@ -32,6 +32,33 @@ void C_ADD::execute()
 	
 }
 
+void C_SUB::execute()
+{
+
+	double temp = 0;
+	// subtract 3rd param from second param
+	temp = opList[1] - opList[2];
+
+	oplist[0].setValue(temp);
+	
+	return;	
+	
+}
+
+void C_DIV::execute()
+{
+
+	double temp = 0;
+	// If second param is zero throw exception/error
+	// divide 3rd param from second param
+	temp = opList[1] / opList[2];
+
+	oplist[0].setValue(temp);
+	
+	return;	
+	
+}
+
 
 
 
