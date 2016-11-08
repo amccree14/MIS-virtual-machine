@@ -61,6 +61,9 @@ UML Diagrams
 # To-Do (Other)
 Debug, Makefile
 
+# Known Issues
+  - Labels currently cannot have names that start with numerals. Will be fixed later, if necessary.
+
 
 # Additional Notes
 
