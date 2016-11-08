@@ -12,13 +12,15 @@ Command class internal parsers
   - OUT
   - SET_STR_CHAR
   - GET_STR_CHAR
-  - LABEL
+  - LABEL (+execute)
   - JMP
   - JMPZNZ
   - JMPGTLTE
   - JMPGTELT
   - SLEEP
-  - VAR
+  - VAR (+execute)
+  
+  *VAR and LABEL are special case commands that are not added to the command vector and are execute on the spot*
   
 Command class parameter creator
   - Takes a parameter and parses it into a PARAM object, returns an OP_PARAM_BASE pointer
@@ -42,13 +44,11 @@ Command class executes
   - OUT
   - SET_STR_CHAR
   - GET_STR_CHAR
-  - LABEL
   - JMP
   - JMPZNZ
   - JMPGTLTE
   - JMPGTELT
   - SLEEP
-  - VAR
   
   
 # To-Do (Marlo)
