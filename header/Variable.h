@@ -10,7 +10,7 @@
 *	- The methods declared in this header file are
 *		implemented in Variable.cpp.
 *
-*	- This file contains the declaration for the Variable class template.
+*	- This file contains the declaration for the Variable class (non-template).
 *		The only thing that is defined within this class is the setValue
 *		function.
 ******************/
@@ -18,16 +18,15 @@
 #include "OP_Param_Base.h"
 
 	// note: non-virtual inheritance, because it's unnecessary
-template <class A>
 class Variable: public OP_Param_Base
 {
 	private:
-		A value;		// value stored within the param or variable
+		int value;		// value stored within the param or variable
 						//	- For param, it's an actual value
 						//	- For variable, it's the variable index
 	
 	public:
-		Variable(A x, OP_TYPE t):OP_Param_Base(t),value(x){}
+		Variable(int x, OP_TYPE t):OP_Param_Base(t),value(x){}
 	
 		void* getValue();			// this should retrieve the value from an 
 									// 	indexed location ( pulled from the 
