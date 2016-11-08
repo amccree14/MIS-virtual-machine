@@ -12,27 +12,114 @@
 
 void C_ADD::execute()
 {
-
-		// temporary value for storing the sum of our parameters
-		// maybe we should use auto for our temp type since the ADD command should be able
-		//to take in both int and float
-	/* auto */ double temp = 0;
-	
-		// loop through the vector and add all parameters (except the first
-		//	one) together
-	for (int i = 1; i < oplist.size(); ++i)
+		// check storage variable type. If it's a NUMERIC type....
+	if (opList[0].type == PARAM_TYPE::VAR_NUM)
 	{
-		temp += oplist[i].getValue();
+			// create temporary variable for storage
+		long long temp = 0;
+			// loop through every parameter and add them based on
+			//	their declared types (casting their returned void*
+			//	to their respective types)
+		for (int i = 1; i < opList.size(); ++i)
+		{
+			switch(opList.type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					temp += *static_cast<long long*>(opList[i]->getValue());
+					break;
+
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					temp += *static_cast<double*>(opList[i]->getValue());
+					break;				
+				
+					// the below 4 cases are ignored because they are invalid
+					//	parameter types for ADD. += doesn't make sense
+					//	for character at all, and is not implemented for
+					//	strings in our virtual machine.
+					
+				//case PARAM_TYPE::CHAR:
+				//case PARAM_TYPE::VAR_CHA:
+				//	temp += *static_cast<char*>(opList[i]->getValue());
+				//	break;
+				
+				//case PARAM_TYPE::STRING:
+				//case PARAM_TYPE::VAR_STR:
+				//	temp += *static_cast<string*>(opList[i]->getValue());
+				//	break;
+				
+					// if there are no matches, throw an exception
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!");
+			}
+		}
+			// store the final value into the given variable
+		opList[0].setValue(static_cast<void*>(&temp));		
 	}
+		// otherwise, if it's a REAL type... (see above for comments)
+	else if (opList[0].type == PARAM_TYPE::VAR_REAL)
+	{
+		double temp = 0;
+			switch(opList.type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					temp += *static_cast<long long*>(opList[i]->getValue());
+					break;
+
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					temp += *static_cast<double*>(opList[i]->getValue());
+					break;				
+				
+				//case PARAM_TYPE::CHAR:
+				//case PARAM_TYPE::VAR_CHA:
+				//	temp += *static_cast<char*>(opList[i]->getValue());
+				//	break;
+				
+				//case PARAM_TYPE::STRING:
+				//case PARAM_TYPE::VAR_STR:
+				//	temp += *static_cast<string*>(opList[i]->getValue());
+				//	break;
+				
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!");
+			}
+		}
+		opList[0].setValue(static_cast<void*>(&temp));
+	}
+		// otherwise, if it's neither a REAL or NUMERIC variable, it's an error
+	else
+		throw MIS_Exception("ERROR: Invalid storage type!");
+		
 	
-		// save the summed value into the variable location provided
-		//	in the first parameter
-	oplist[0].setValue(temp);
-	
-		// done
 	return;	
-	
 }
+
+
+
+
+
+
+
+
+
+
+////////////// I think separating every command class into its own
+////////////// cpp file may be useful here. It's debatable, since it will
+////////////// also make finding all the relevant command classes to adjust
+////////////// code more irritating.
+
+
+
+
+
+
+
+
+
+
 
 void C_SUB::execute()
 {
