@@ -40,8 +40,6 @@ class Command
 		std::vector<std::shared_ptr<OP_Param_Base>> oplist;
 		
 		OP_System_Data* mdata;
-		
-		int max_size = 0;
 											
 	
 	
