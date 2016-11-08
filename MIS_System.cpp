@@ -1,3 +1,18 @@
+/******************
+* FILE: MIS_System.cpp
+* Author: Arthur Kung
+* Date: Nov 7, 2016
+*
+* Details:
+*	- This contains the 'run' and 'parse' functions of the primary
+*		MIS_System class. This relies on a number of other classes
+*		in its implementation.
+*
+*	  The parsing is only partially completed here. All that the
+*		parser included here does is find an opcode, then send
+*		the parameter list to the found opcode's internal parser.
+******************/
+
 
 #include <memory>	// shared_ptr
 #include <map>		// std maps
