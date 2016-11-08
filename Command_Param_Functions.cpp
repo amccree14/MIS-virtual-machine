@@ -92,13 +92,20 @@ OP_Param_Base* Command::makeParam(std::stringstream& ss)
 			************************/
 		if (ss.peek() == '\"')
 		{
+				// create temp string
 			std::string temp;
+				// remove leading character that we checked for
 			ss.get();
 			
+				// pull characters until we hit the closing quote
 			std::getline(ss, temp, '\"');
 			
+				// clear our string buffer, load it until our first comma
+				//	after the closing quote
 			st.clear();
 			std::getline(ss, st, ',');
+			
+				// concatenate the two strings
 			st = temp + st;
 			
 			
@@ -201,7 +208,6 @@ OP_Param_Base* Command::makeParam(std::stringstream& ss)
 			************************/
 		else if (isalpha(ss.peek()))
 		{
-			ss.get();
 			st.clear();
 			std::getline(ss, st, ',');
 			
@@ -223,7 +229,6 @@ OP_Param_Base* Command::makeParam(std::stringstream& ss)
 			************************/
 		else if (isdigit(ss.peek()))
 		{
-			ss.get();
 			st.clear();
 			std::getline(ss, st, ',');
 			
@@ -303,9 +308,12 @@ OP_Param_Base* Command::makeParam(std::stringstream& ss)
 
 void Command::addParam(OP_Param_Base* op)
 {
+		// create a shared_ptr and load it with the OP_Param_Base pointer
 	std::shared_ptr<OP_Param_Base>> sp;
 	sp.reset(op);
 	
+		// try to push the shared_ptr onto the back of the vector,
+		//	and catch any failed allocations by the vector
 	try
 	{
 		oplist.push_back(sp);
