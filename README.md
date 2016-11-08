@@ -22,7 +22,7 @@ Command class internal parsers
   
   *VAR and LABEL are special case commands that are not added to the command vector and are execute on the spot*
   
-~~Command class parameter creator
+~~Command class parameter creator~~
   - Takes a parameter and parses it into a PARAM object, returns an OP_PARAM_BASE pointer
   - It is expected that the parsers all check the returned OP_PARAM_BASE pointers for acceptable parameter types for their opcodes~~
   
