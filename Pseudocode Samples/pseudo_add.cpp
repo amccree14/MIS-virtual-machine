@@ -51,7 +51,9 @@ void C_ADD::execute()
 				
 					// if there are no matches, throw an exception
 				default
-					throw MIS_Exception("ERROR: Invalid parameter type!");
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (ADD parameter" 
+										+ std::to_string(i+1) + ")\n");
 			}
 		}
 			// store the final value into the given variable
@@ -84,14 +86,16 @@ void C_ADD::execute()
 				//	break;
 				
 				default
-					throw MIS_Exception("ERROR: Invalid parameter type!");
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (ADD parameter" 
+										+ std::to_string(i+1) + ")\n");
 			}
 		}
 		opList[0].setValue(static_cast<void*>(&temp));
 	}
 		// otherwise, if it's neither a REAL or NUMERIC variable, it's an error
 	else
-		throw MIS_Exception("ERROR: Invalid storage type!");
+		throw MIS_Exception("ERROR: Invalid storage type! (ADD)\n");
 		
 	
 	return;	
