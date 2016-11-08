@@ -53,6 +53,11 @@ UML Diagrams
    - Class
    - Sequence
    - Use
+   
+   
+# To-Do (Other)
+Debug
+Makefile
 
 
 # Additional Notes
