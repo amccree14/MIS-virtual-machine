@@ -57,4 +57,5 @@ UML Diagrams
 
 # Additional Notes
 
-(Arthur, 11/7/16) Fortunately, it looks like everything we're working on can be split into individual .cpp files, so there's no direct overlap. I'll hammer out the rest of my stuff tonight.
+(Arthur, 11/7/16)
+  Fortunately, it looks like everything we're working on can be split into individual .cpp files, so there's no direct overlap. I'll hammer out the rest of my stuff tonight.
