@@ -24,6 +24,9 @@ Command class parameter creator
   - Takes a parameter and parses it into a PARAM object, returns an OP_PARAM_BASE pointer
   - It is expected that the parsers all check the returned OP_PARAM_BASE pointers for acceptable parameter types for their opcodes
   
+Command class generic addParam(OP_Param_Base pointer) function
+  - converts an OP_Param_Base pointer to a shared pointer and pushes it onto the Command class's internal vector
+  
 Param class setter/getters/constructors
   - PARAM
   - VARIABLE
