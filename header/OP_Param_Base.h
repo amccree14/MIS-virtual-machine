@@ -42,6 +42,9 @@ class OP_Param_Base
 		virtual void* getValue();
 			// set value for a variable, throw error for normal param
 		virtual void setValue(void*);
+		
+			// return type of this parameter
+		OP_TYPE getType(){return type;}
 
 		
 		

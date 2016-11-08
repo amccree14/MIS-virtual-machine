@@ -11,6 +11,8 @@
 *		as an subclass of std::runtime_error
 ******************/
 
+#include <stdexcept>
+
 class MIS_Exception:public std::runtime_error
 {
 	public:

@@ -33,7 +33,7 @@
 
 class MIS_System_Data
 {
-	int PC = 0;						// 'program counter' (xf: LC-3)
+	unsigned long long PC = 0;					// 'program counter' (xf: LC-3)
 	
 	public:
 		std::vector<std::shared_ptr<Command>> commands;	// command vector

@@ -69,6 +69,9 @@ class Command
 		// ~Command destructor will only be needed if vectors do not clean
 		//		themselves up when they exit scope. If they do NOT, then all we
 		//		need to do is 'while(oplist.pop())', and it will clean it up.
+		//	Since we're using shared pointers in the vector, and vectors
+		//		call the destructors of all their elements when they exit
+		//		scope, we should be fine with the default destructor.
 		
 		
 
