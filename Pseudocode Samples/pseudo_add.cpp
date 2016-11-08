@@ -150,7 +150,7 @@ void C_SUB::execute()
 							throw MIS_Exception("ERROR: Invalid parameter type!"
 												" (SUB parameter" 
 												+ std::to_string(2) + ")\n");}
-					
+					break;
 					     
 
 				case PARAM_TYPE::REAL:
@@ -408,8 +408,100 @@ void C_DIV::execute()
 	
 }
 
+void C_MUL::execute() {
+	
+	if (opList[0].type == PARAM_TYPE::VAR_NUM)
+	{
+			// create temporary variable for storage
+		long long temp = 1;
+			// loop through every parameter and add them based on
+			//	their declared types (casting their returned void*
+			//	to their respective types)
+		for (int i = 1; i < opList.size(); ++i)
+		{
+			switch(opList.type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					temp *= *static_cast<long long*>(opList[i]->getValue());
+					break;
+
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					temp *= *static_cast<double*>(opList[i]->getValue());
+					break;				
+				
+					// the below 4 cases are ignored because they are invalid
+					//	parameter types for ADD. += doesn't make sense
+					//	for character at all, and is not implemented for
+					//	strings in our virtual machine.
+					
+				//case PARAM_TYPE::CHAR:
+				//case PARAM_TYPE::VAR_CHA:
+				//	temp += *static_cast<char*>(opList[i]->getValue());
+				//	break;
+				
+				//case PARAM_TYPE::STRING:
+				//case PARAM_TYPE::VAR_STR:
+				//	temp += *static_cast<string*>(opList[i]->getValue());
+				//	break;
+				
+					// if there are no matches, throw an exception
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (ADD parameter" 
+										+ std::to_string(i+1) + ")\n");
+			}
+		}
+			// store the final value into the given variable
+		opList[0].setValue(static_cast<void*>(&temp));		
+	}
+		// otherwise, if it's a REAL type... (see above for comments)
+	else if (opList[0].type == PARAM_TYPE::VAR_REAL)
+	{
+		double temp = 1;
+			switch(opList.type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					temp *= *static_cast<long long*>(opList[i]->getValue());
+					break;
+
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					temp *= *static_cast<double*>(opList[i]->getValue());
+					break;				
+				
+				//case PARAM_TYPE::CHAR:
+				//case PARAM_TYPE::VAR_CHA:
+				//	temp += *static_cast<char*>(opList[i]->getValue());
+				//	break;
+				
+				//case PARAM_TYPE::STRING:
+				//case PARAM_TYPE::VAR_STR:
+				//	temp += *static_cast<string*>(opList[i]->getValue());
+				//	break;
+				
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (ADD parameter" 
+										+ std::to_string(i+1) + ")\n");
+			}
+		}
+		opList[0].setValue(static_cast<void*>(&temp));
+	}
+		// otherwise, if it's neither a REAL or NUMERIC variable, it's an error
+
+	else
+		throw MIS_Exception("ERROR: Invalid storage type! (ADD)\n");
+		
+	
+	return;	
+}
+
 void C_ASSIGN::execute()
 {
+	
 	// storing second parameter into firs 
 	oplist[0].setValue(opList[1]);
 	
