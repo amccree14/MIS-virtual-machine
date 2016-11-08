@@ -56,8 +56,7 @@ UML Diagrams
    
    
 # To-Do (Other)
-Debug\n
-Makefile
+Debug, Makefile
 
 
 # Additional Notes
