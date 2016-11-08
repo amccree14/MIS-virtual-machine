@@ -71,7 +71,7 @@ bool gapless(std::string st)
 *
 ****************************/
 
-OP_Param_Base* Command::makeParam(std::stringstream& ss)
+static OP_Param_Base* Command::makeParam(std::stringstream& ss)
 {
 		// create a storage string and empty it
 	std::string st;	
@@ -107,6 +107,24 @@ OP_Param_Base* Command::makeParam(std::stringstream& ss)
 			
 				// concatenate the two strings
 			st = temp + st;
+			
+			
+				// STRING-specific sequences, replace escape codes
+				//	with their equivalents.
+			temp = "\\n";
+			int i = st.find(temp);
+			while (i != std::string::npos)
+				st.replace(i, 2, "\n");
+				
+			temp = "\\r";
+			int i = st.find(temp);
+			while (i != std::string::npos)
+				st.replace(i, 2, "\r");
+				
+			temp = "\\t";
+			int i = st.find(temp);
+			while (i != std::string::npos)
+				st.replace(i, 2, "\t");
 			
 			
 				// CREATE STRING PARAM (use st)
@@ -179,7 +197,7 @@ OP_Param_Base* Command::makeParam(std::stringstream& ss)
 			
 			int index = mdata->varNames.at(st);
 			
-			PARAM_TYPE t = mdata->variables.at(index)->getType()
+			PARAM_TYPE t = mdata->variables.at(index)->getType();
 			
 			switch(t)
 			{

@@ -51,7 +51,7 @@ void MIS_System::parse(char* filename)
 			//--CREATE OBJECT FACTORY FOR THIS MIS_SYSTEM:--//
 			//////////////////////////////////////////////////
 	
-		// note: objf["__"] = std::shared_ptr<Command>(new C_XYZ()) works too.	
+		// note: objf["__"] = std::shared_ptr<Command>(new C_XYZ()) works too.
 	objf["ADD"].reset(new C_ADD(&mdata));
 	objf["SUB"].reset(new C_SUB(&mdata));
 	objf["MUL"].reset(new C_MUL(&mdata));
@@ -150,13 +150,17 @@ void MIS_System::parse(char* filename)
 				{
 						// if found, get the rest of the line after the token
 					std::getline(ss, sbuf);
+					
+					ss.str("");
+					ss.clear();					
+					ss << sbuf;
 						// call the parse function from the indexed
 						//	command object, which will populate the
 						//	command vector with push(). 
 						// Certain command objects, like VAR and LABEL
 						//	do not populate the command vector, but instead
 						//	add values to their respective vectors or maps.
-					objf.at(temp)->parse(sbuf);
+					objf.at(temp)->parse(ss);
 				}
 			}
 		}	// if no token match was found in the map, then catch the exception
