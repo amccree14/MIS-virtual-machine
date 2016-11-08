@@ -35,7 +35,7 @@ class OP_Param_Base
 						   VAR_NUM, VAR_REA, VAR_CHA, VAR_STR};
 		
 			// store value in constructor
-		OP_Param_Base(){}	// empty constructor
+		OP_Param_Base(OP_TYPE t):type(t){}	// empty constructor
 		
 		
 			// get value from variable/parameter

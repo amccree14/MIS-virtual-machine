@@ -27,7 +27,7 @@ class Variable: public OP_Param_Base
 						//	- For variable, it's the variable index
 	
 	public:
-		Variable(A x, bool y=false):OP_Param_Base(y), value(x){};
+		Variable(A x, OP_TYPE t):OP_Param_Base(t),value(x){}
 	
 		void* getValue();			// this should retrieve the value from an 
 									// 	indexed location ( pulled from the 

@@ -34,7 +34,7 @@ class Params: public OP_Param_Base
 						//	- For variable, it's the variable index
 	
 	public:
-		Params(A x):value(x){};
+		Params(A x, OP_TYPE t):OP_Param_Base(t),value(x){}
 		
 		void* getValue();			// return value
 		void setValue(void*);		// this should always throw an exception

@@ -29,7 +29,7 @@ class V_Param: public OP_Param_Base
 						//	- For variable, it's the variable index
 	
 	public:
-		Params(A x):value(x){};
+		V_Param(A x, OP_TYPE t):OP_Param_Base(t),value(x){}
 		
 		void* getValue();			// return value
 		void setValue(void*);		// this will set a value

@@ -24,6 +24,8 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
+#include <memory>	// shared_ptr
 
 #include "MIS_System_Data.h"	// all the necessary data members
 #include "OP_System_Data.h"
@@ -59,11 +61,15 @@ class Command
 											//  Takes a pointer and converts it
 											//	to a shared_ptr to be placed
 											//	in the oplist vector.
+		static OP_Param_Base* makeParam(std::stringstream);
+											// static function in the class
+											//	that parses a string and
+											//	creates a parameter from it
 		
 		
 		virtual void execute();			// calls op and passes it parameters
 		
-		virtual Command* parse(string);
+		virtual Command* parse(std::stringstream);
 		
 		
 		// ~Command destructor will only be needed if vectors do not clean
