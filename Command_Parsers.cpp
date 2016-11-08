@@ -809,6 +809,8 @@ Command* C_VAR::parse(std:stringstream ss)
 
 			int index = mdata->variables.size();		// get index of new var
 							
+				// create the variable and v_param objects for the vectors
+				//	and maps
 			switch(st)
 			{
 				case "NUMERIC":
@@ -817,33 +819,62 @@ Command* C_VAR::parse(std:stringstream ss)
 					std::shared_ptr<Variable> va(new Variable(index,
 												PARAM_TYPE::VAR_NUM)
 					mdata->variables.push_back(vp);
+					
+					
+					
+					
+					
+					
 					break;
+					
+					
 				case "REAL":
 					std::shared_ptr<V_Param> vp(new V_Param(0.0,
 												PARAM_TYPE::REAL)
 					std::shared_ptr<Variable> va(new Variable(index,
-												PARAM_TYPE::VAR_NUM)
+												PARAM_TYPE::VAR_REAL)
 					mdata->variables.push_back(vp);
+					
+					
+					
+					
 					break;
+					
+					
 				case "CHAR":
 					std::shared_ptr<V_Param> vp(new V_Param('',
 												PARAM_TYPE::CHAR)
 					std::shared_ptr<Variable> va(new Variable(index,
-												PARAM_TYPE::VAR_NUM)
+												PARAM_TYPE::VAR_CHA)
 					mdata->variables.push_back(vp);
+					
+					
+					
+					
+					
 					break;
+					
+					
 				case "STRING":
 					std::shared_ptr<V_Param> vp(new V_Param("",
 												PARAM_TYPE::STRING)
 					std::shared_ptr<Variable> va(new Variable(index,
-												PARAM_TYPE::VAR_NUM)
+												PARAM_TYPE::VAR_STR)
 					mdata->variables.push_back(vp);
+					
+					
+					
+					
+					
+					
 					break;
+					
+					
 				default:
 					throw MIS_Exception("Invalid variable type!\n");
 			}
 					
-					
+			
 			
 			
 			
