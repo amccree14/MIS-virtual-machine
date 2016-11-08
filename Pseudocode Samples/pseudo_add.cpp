@@ -13,16 +13,16 @@
 void C_ADD::execute()
 {
 		// check storage variable type. If it's a NUMERIC type....
-	if (opList[0].type == PARAM_TYPE::VAR_NUM)
+	if (opList[0]->type == PARAM_TYPE::VAR_NUM)
 	{
 			// create temporary variable for storage
 		long long temp = 0;
 			// loop through every parameter and add them based on
 			//	their declared types (casting their returned void*
 			//	to their respective types)
-		for (int i = 1; i < opList.size(); ++i)
+		for (int i = 1; i < opList->size(); ++i)
 		{
-			switch(opList.type)
+			switch(opList->type)
 			{
 				case PARAM_TYPE::NUMERIC:
 				case PARAM_TYPE::VAR_NUM:
@@ -57,13 +57,13 @@ void C_ADD::execute()
 			}
 		}
 			// store the final value into the given variable
-		opList[0].setValue(static_cast<void*>(&temp));		
+		opList[0]->setValue(static_cast<void*>(&temp));		
 	}
 		// otherwise, if it's a REAL type... (see above for comments)
-	else if (opList[0].type == PARAM_TYPE::VAR_REAL)
+	else if (opList[0]->type == PARAM_TYPE::VAR_REAL)
 	{
 		double temp = 0;
-			switch(opList.type)
+			switch(opList->type)
 			{
 				case PARAM_TYPE::NUMERIC:
 				case PARAM_TYPE::VAR_NUM:
@@ -91,7 +91,7 @@ void C_ADD::execute()
 										+ std::to_string(i+1) + ")\n");
 			}
 		}
-		opList[0].setValue(static_cast<void*>(&temp));
+		opList[0]->setValue(static_cast<void*>(&temp));
 	}
 		// otherwise, if it's neither a REAL or NUMERIC variable, it's an error
 
@@ -201,10 +201,10 @@ void C_SUB::execute()
 				
 		}
 			// store the final value into the given variable
-		opList[0].setValue(static_cast<void*>(&temp));		
+		opList[0]->setValue(static_cast<void*>(&temp));		
 	}
 		// otherwise, if it's a REAL type... (see above for comments)
-	else if (opList[0].type == PARAM_TYPE::VAR_REAL)
+	else if (opList[0]->type == PARAM_TYPE::VAR_REAL)
 	{
 		double temp;
 		
@@ -337,10 +337,10 @@ void C_DIV::execute()
 										+ std::to_string(1) + ")\n");
 					}
 			// store the final value into the given variable
-		opList[0].setValue(static_cast<void*>(&temp));		
+		opList[0]->setValue(static_cast<void*>(&temp));		
 	}
 		// otherwise, if it's a REAL type... (see above for comments)
-	else if (opList[0].type == PARAM_TYPE::VAR_REAL)
+	else if (opList[0]->type == PARAM_TYPE::VAR_REAL)
 	{
 		double temp;
 		
@@ -410,16 +410,16 @@ void C_DIV::execute()
 
 void C_MUL::execute() {
 	
-	if (opList[0].type == PARAM_TYPE::VAR_NUM)
+	if (opList[0]->type == PARAM_TYPE::VAR_NUM)
 	{
 			// create temporary variable for storage
 		long long temp = 1;
 			// loop through every parameter and add them based on
 			//	their declared types (casting their returned void*
 			//	to their respective types)
-		for (int i = 1; i < opList.size(); ++i)
+		for (int i = 1; i < opList->size(); ++i)
 		{
-			switch(opList.type)
+			switch(opList->type)
 			{
 				case PARAM_TYPE::NUMERIC:
 				case PARAM_TYPE::VAR_NUM:
@@ -454,13 +454,13 @@ void C_MUL::execute() {
 			}
 		}
 			// store the final value into the given variable
-		opList[0].setValue(static_cast<void*>(&temp));		
+		opList[0]->setValue(static_cast<void*>(&temp));		
 	}
 		// otherwise, if it's a REAL type... (see above for comments)
-	else if (opList[0].type == PARAM_TYPE::VAR_REAL)
+	else if (opList[0]->type == PARAM_TYPE::VAR_REAL)
 	{
 		double temp = 1;
-			switch(opList.type)
+			switch(opList->type)
 			{
 				case PARAM_TYPE::NUMERIC:
 				case PARAM_TYPE::VAR_NUM:
@@ -488,7 +488,7 @@ void C_MUL::execute() {
 										+ std::to_string(i+1) + ")\n");
 			}
 		}
-		opList[0].setValue(static_cast<void*>(&temp));
+		opList[0]->setValue(static_cast<void*>(&temp));
 	}
 		// otherwise, if it's neither a REAL or NUMERIC variable, it's an error
 
