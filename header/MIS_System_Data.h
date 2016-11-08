@@ -19,8 +19,8 @@
 #include <map>			// std maps
 
 #include "Command.h"
-#include "Label.h"
 #include "Variable.h"
+#include "V_Param.h"
 
 	//	In the future, the varNames map will need to be individually
 	//		lockable for multi-threading. So will PC.
@@ -43,7 +43,7 @@ class MIS_System_Data
 			// varNames is only used during 'compile' time, since afterwards
 			//		the variable parameters will be stored directly by index
 		std::map<string, int> varNames;	// map of var indices by name
-		std::vector<std::shared_ptr<Params>> variables;	// vector of var values
+		std::vector<std::shared_ptr<V_Param>> variables;	// var data vector
 		
 		
 			// these functions MAY be needed for future locking capabilities

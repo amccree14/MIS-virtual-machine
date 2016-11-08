@@ -19,15 +19,28 @@
 
 	// note: non-virtual inheritance, because it's unnecessary
 template <class A>
-class Variable: public OP_Param_Base<A>
+class Variable: public OP_Param_Base
 {
-	Variable(A x):OP_Param_Base(x){};
+	private:
+		A value;		// value stored within the param or variable
+						//	- For param, it's an actual value
+						//	- For variable, it's the variable index
 	
-	A getValue();			// this should retrieve the value from an indexed
-							// location in the variable map
+	public:
+		Variable(A x, bool y=false):OP_Param_Base(y), value(x){};
 	
-	void setValue(A);		// this should store a value into an indexed 
-							// location in the variable map
+		void* getValue();			// this should retrieve the value from an 
+									// 	indexed location ( pulled from the 
+									//	variable map) in the variable data
+									//	vector.
+									// Basically a wrapper for V_Param
+									//	class's getter.
+	
+		void setValue(void*);		// this should store a value into an indexed 
+									// 	location (pulled from the variable map)
+									// 	in the variable data vector.
+									// It's basically a wrapper for the
+									//	V_Param class's setter.
 };
 
 

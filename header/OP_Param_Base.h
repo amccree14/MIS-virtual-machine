@@ -28,7 +28,6 @@
 	//	REAL 	- 8 bytes	- standard int/double is 8 bytes or MORE
 	//	CHAR 	- 1 byte	- use 'long long' and 'double' for 8 bytes
 	//	STRING 	- 1-256 bytes
-template <class A>
 class OP_Param_Base
 {
 	public:
@@ -36,20 +35,17 @@ class OP_Param_Base
 						   VAR_NUM, VAR_REA, VAR_CHA, VAR_STR};
 		
 			// store value in constructor
-		OP_Param_Base(A x):value(x){};
+		OP_Param_Base(){}	// empty constructor
+		
 		
 			// get value from variable/parameter
-		virtual A getValue();
+		virtual void* getValue();
 			// set value for a variable, throw error for normal param
-		virtual void setValue(A input);
+		virtual void setValue(void*);
 
 		
 		
-	protected:		
-		A value;		// value stored within the param or variable
-						//	- For param, it's an actual value
-						//	- For variable, it's the variable index
-						
+	protected:								
 		OP_TYPE type;	// the type of param or variable
 		
 };

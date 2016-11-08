@@ -11,8 +11,8 @@
 *		implemented in Params.cpp.
 *
 *	- This file contains the declaration for the Params class template.
-*		The only thing that is defined within this class is the setValue
-*		function.
+*		The only things that are defined within this class are the setValue
+*		and getValue functions.
 *
 *	  NOTE: The setValue function could have been defined within this
 *			header, since it literally does nothing but throw an
@@ -21,16 +21,23 @@
 *			debugging.
 ******************/
 
+#include "MIS_Exception.h"		// for our exception
 #include "OP_Param_Base.h"
 
 	// note: non-virtual inheritance, because it's unnecessary
 template <class A>
-class Params: public OP_Param_Base<A>
+class Params: public OP_Param_Base
 {
-	Params(A x):OP_Param_Base(x){};
+	private:
+		A value;		// value stored within the param or variable
+						//	- For param, it's an actual value
+						//	- For variable, it's the variable index
 	
-	A getValue();			// return value
-	void setValue(A);		// this should just throw an exception
+	public:
+		Params(A x):value(x){};
+		
+		void* getValue();			// return value
+		void setValue(void*);		// this should always throw an exception
 };
 
 

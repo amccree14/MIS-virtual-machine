@@ -32,6 +32,9 @@
 #include "MIS_System_Data.h"
 
 
+#define MIS_MAX_LINE_LENGTH 1024
+
+
 class MIS_System
 {
 
