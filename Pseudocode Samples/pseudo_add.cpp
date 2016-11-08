@@ -502,11 +502,9 @@ void C_MUL::execute() {
 void C_ASSIGN::execute()
 {
 	
-	// storing second parameter into firs 
-	oplist[0].setValue(opList[1]);
-	
-	return;	
-	
+	if((oplist[0]->type == PARAM_TYPE::VAR_NUM) && (oplist[1]->type == PARAM_TYPE::VAR_NUM || PARAM_TYPE::NUMERIC)) {
+		long long var = *static_cast<long long*>(oplist[1]->getvalue());
+		oplist[0].setValue(static_cast<void*>(&var);
 }
 
 void C_OUT::execute() {
