@@ -118,38 +118,293 @@ void C_ADD::execute()
 
 
 
-
-
-
-
-
-
-
 void C_SUB::execute()
 {
-	
+		// check storage variable type. If it's a NUMERIC type....
+	if (opList[0]->type == PARAM_TYPE::VAR_NUM) {
+		
+	 	long long temp;
+		
+			switch(opList[1]->type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					long long var1 = *static_cast<long long*>(opList[1]->getValue());
+					
+									
+					switch(opList[2]->type)
+					{
+						case PARAM_TYPE::NUMERIC:
+						case PARAM_TYPE::VAR_NUM:
+							long long var2 = *static_cast<long long*>(opList[2]->getValue());
+							temp = var1 - var2;
+							break;
 
-	auto temp;
-	// subtract 3rd param from second param
-	temp = opList[1] - opList[2];
+						case PARAM_TYPE::REAL:
+						case PARAM_TYPE::VAR_REA:
+							double var2 = *static_cast<double*>(opList[2]->getValue());
+							temp = var1 - var2;
+							break;
 
-	oplist[0].setValue(temp);
+						default
+							throw MIS_Exception("ERROR: Invalid parameter type!"
+												" (SUB parameter" 
+												+ std::to_string(2) + ")\n");}
+					
+					     
+
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					double var1 = *static_cast<double*>(opList[1]->getValue());
+					
+									
+					switch(opList[2]->type){
+						case PARAM_TYPE::NUMERIC:
+						case PARAM_TYPE::VAR_NUM:
+							long long var2 = *static_cast<long long*>(opList[2]->getValue());
+							temp = var1 - var2;
+							break;
+
+						case PARAM_TYPE::REAL:
+						case PARAM_TYPE::VAR_REA:
+							double var2 = *static_cast<double*>(opList[2]->getValue());
+							temp var1 - var2;
+							break;
+
+						default
+							throw MIS_Exception("ERROR: Invalid parameter type!"
+												" (SUB parameter" 
+												+ std::to_string(2) + ")\n");}
+					break;
+								
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (SUB parameter" 
+										+ std::to_string(1) + ")\n");
+			
+			/*switch(opList[2]->type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					var2 = *static_cast<long long*>(opList[2]->getValue());
+					break;
+
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					var2 = *static_cast<double*>(opList[2]->getValue());
+					break;
+								
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (SUB parameter" 
+										+ std::to_string(2) + ")\n");} }*/
+				
+		}
+			// store the final value into the given variable
+		opList[0].setValue(static_cast<void*>(&temp));		
+	}
+		// otherwise, if it's a REAL type... (see above for comments)
+	else if (opList[0].type == PARAM_TYPE::VAR_REAL)
+	{
+		double temp;
+		
+			switch(opList[1]->type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					long long var1 = *static_cast<long long*>(opList[1]->getValue());
+					
+									
+					switch(opList[2]->type)
+					{
+						case PARAM_TYPE::NUMERIC:
+						case PARAM_TYPE::VAR_NUM:
+							long long var2 = *static_cast<long long*>(opList[2]->getValue());
+							temp = var1 - var2;
+							break;
+
+						case PARAM_TYPE::REAL:
+						case PARAM_TYPE::VAR_REA:
+							double var2 = *static_cast<double*>(opList[2]->getValue());
+							temp = var1 - var2;
+							break;
+
+						default
+							throw MIS_Exception("ERROR: Invalid parameter type!"
+												" (SUB parameter" 
+												+ std::to_string(2) + ")\n");}
+					
+					     
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					double var1 = *static_cast<double*>(opList[1]->getValue());
+					
+									
+					switch(opList[2]->type){
+						case PARAM_TYPE::NUMERIC:
+						case PARAM_TYPE::VAR_NUM:
+							long long var2 = *static_cast<long long*>(opList[2]->getValue());
+							temp = var1 - var2;
+							break;
+
+						case PARAM_TYPE::REAL:
+						case PARAM_TYPE::VAR_REA:
+							double var2 = *static_cast<double*>(opList[2]->getValue());
+							temp var1 - var2;
+							break;
+
+						default
+							throw MIS_Exception("ERROR: Invalid parameter type!"
+												" (SUB parameter" 
+												+ std::to_string(2) + ")\n");}
+					break;
+								
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (SUB parameter" 
+										+ std::to_string(1) + ")\n");
+		
+	}
+		// otherwise, if it's neither a REAL or NUMERIC variable, it's an error
+
+	else { throw MIS_Exception("ERROR: Invalid storage type! (ADD)\n"); }
+		
 	
 	return;	
+	}	
 	
 }
 
 void C_DIV::execute()
 {
+	if (opList[0]->type == PARAM_TYPE::VAR_NUM) {
+		
+	 	long long temp;
+		
+			switch(opList[1]->type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					long long var1 = *static_cast<long long*>(opList[1]->getValue());
+					
+									
+					switch(opList[2]->type)
+					{
+						case PARAM_TYPE::NUMERIC:
+						case PARAM_TYPE::VAR_NUM:
+							long long var2 = *static_cast<long long*>(opList[2]->getValue());
+							temp = var1 / var2;
+							break;
 
-	auto temp;
-	// If second param is zero throw exception/error
-	// divide 3rd param from second param
-	temp = opList[1] / opList[2];
+						case PARAM_TYPE::REAL:
+						case PARAM_TYPE::VAR_REA:
+							double var2 = *static_cast<double*>(opList[2]->getValue());
+							temp = var1 / var2;
+							break;
 
-	oplist[0].setValue(temp);
+						default
+							throw MIS_Exception("ERROR: Invalid parameter type!"
+												" (SUB parameter" 
+												+ std::to_string(2) + ")\n");}
+
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					double var1 = *static_cast<double*>(opList[1]->getValue());
+					
+									
+					switch(opList[2]->type){
+						case PARAM_TYPE::NUMERIC:
+						case PARAM_TYPE::VAR_NUM:
+							long long var2 = *static_cast<long long*>(opList[2]->getValue());
+							temp = var1 / var2;
+							break;
+
+						case PARAM_TYPE::REAL:
+						case PARAM_TYPE::VAR_REA:
+							double var2 = *static_cast<double*>(opList[2]->getValue());
+							temp var1 / var2;
+							break;
+
+						default
+							throw MIS_Exception("ERROR: Invalid parameter type!"
+												" (SUB parameter" 
+												+ std::to_string(2) + ")\n");}
+					break;
+								
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (SUB parameter" 
+										+ std::to_string(1) + ")\n");
+					}
+			// store the final value into the given variable
+		opList[0].setValue(static_cast<void*>(&temp));		
+	}
+		// otherwise, if it's a REAL type... (see above for comments)
+	else if (opList[0].type == PARAM_TYPE::VAR_REAL)
+	{
+		double temp;
+		
+			switch(opList[1]->type)
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					long long var1 = *static_cast<long long*>(opList[1]->getValue());
+					
+									
+					switch(opList[2]->type)
+					{
+						case PARAM_TYPE::NUMERIC:
+						case PARAM_TYPE::VAR_NUM:
+							long long var2 = *static_cast<long long*>(opList[2]->getValue());
+							temp = var1 / var2;
+							break;
+
+						case PARAM_TYPE::REAL:
+						case PARAM_TYPE::VAR_REA:
+							double var2 = *static_cast<double*>(opList[2]->getValue());
+							temp = var1 / var2;
+							break;
+
+						default
+							throw MIS_Exception("ERROR: Invalid parameter type!"
+												" (SUB parameter" 
+												+ std::to_string(2) + ")\n");}
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					double var1 = *static_cast<double*>(opList[1]->getValue());
+					
+									
+					switch(opList[2]->type){
+						case PARAM_TYPE::NUMERIC:
+						case PARAM_TYPE::VAR_NUM:
+							long long var2 = *static_cast<long long*>(opList[2]->getValue());
+							temp = var1 / var2;
+							break;
+
+						case PARAM_TYPE::REAL:
+						case PARAM_TYPE::VAR_REA:
+							double var2 = *static_cast<double*>(opList[2]->getValue());
+							temp var1 / var2;
+							break;
+
+						default
+							throw MIS_Exception("ERROR: Invalid parameter type!"
+												" (SUB parameter" 
+												+ std::to_string(2) + ")\n");}
+					break;
+								
+				default
+					throw MIS_Exception("ERROR: Invalid parameter type!"
+										" (SUB parameter" 
+										+ std::to_string(1) + ")\n");
+		
+	}
+		
+		else { throw MIS_Exception("ERROR: Invalid storage type! (ADD)\n"); }
+		
 	
 	return;	
+	}	
 	
 }
 
