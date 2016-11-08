@@ -94,6 +94,7 @@ void C_ADD::execute()
 		opList[0].setValue(static_cast<void*>(&temp));
 	}
 		// otherwise, if it's neither a REAL or NUMERIC variable, it's an error
+
 	else
 		throw MIS_Exception("ERROR: Invalid storage type! (ADD)\n");
 		
@@ -109,10 +110,9 @@ void C_ADD::execute()
 
 
 
-
 ////////////// I think separating every command class into its own
-////////////// cpp file may be useful here. It's debatable, since it will
-////////////// also make finding all the relevant command classes to adjust
+
+	////////////// cpp file may be useful here. It's debatable, since it will////////////// also make finding all the relevant command classes to adjust
 ////////////// code more irritating.
 
 
@@ -166,9 +166,39 @@ void C_OUT::execute() {
 		// start at begininng of oplist to print out every value 
 		for (int i = 0; i < oplist.size() - 1; ++i)
 	{
-		std::cout << oplist[i].getvalue() << endl;
+		std::cout << oplist[i]->getvalue() << endl;
 	}
 	
 	return;
 }
+
+void C_SET_STR_CHAR::execute() {
+	
+	long long index = *static_cast<long long*>(opList[1]->getValue());
+	string* s = static_cast<string*>(opList[0]->getValue());
+	char c = *static_cast<char*>(opList[2]->getValue());
+	
+	*s.at(index) = c;
+	
+	return;
+}
+
+void C_GET_STR_CHAR::execute() {
+	
+	long long index = *static_cast<long long*>(opList[1]->getValue());
+	string s = *static_cast<string*>(opList[0]->getValue());
+	//char *c = static_cast<char*>(opList[2]->getValue());
+	
+	char c = s.at(index);
+	oplist[2]->setValue(static_cast<void*>(&c));
+	
+	return;	
+}
+
+
+	
+	
+	
+	
+
 	
