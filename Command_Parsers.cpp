@@ -4,11 +4,7 @@
 * Date: Nov 7, 2016
 *
 * Details:
-*	- implements the two main functions from the Command class necessary
-*		for parsing parameters and adding them to the parameter vectors.
-*
-*	- also includes 3 helper functions at the top of the file in the form of
-*		noWhite(), noWhiteEndString(), and gapless().
+*	- implements the parse functions for every command class
 ******************/
 
 
