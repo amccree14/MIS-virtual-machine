@@ -42,13 +42,18 @@ class OP_Param_Base
 		virtual void* getValue();
 			// set value for a variable, throw error for normal param
 		virtual void setValue(void*);
+	
+			// these size functions are for the STRING variables
+		void setSize(int);
+		int getSize();
 		
 			// return type of this parameter
 		OP_TYPE getType(){return type;}
 
 		
 		
-	protected:								
+	protected:	
+		int max_size = 0;
 		OP_TYPE type;	// the type of param or variable
 		
 };
