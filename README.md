@@ -62,6 +62,7 @@ UML Diagrams
 Debug, Makefile
 
 # Known Issues
+  - Commenting is sparse in some files, due to time constraints.
   - Labels currently cannot have names that start with numerals. Will be fixed later, if necessary.
 
 
