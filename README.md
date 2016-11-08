@@ -3,7 +3,6 @@ CS109 project
 
 
 # To-Do (Arthur)
-
 Command class internal parsers
   - ADD
   - SUB
@@ -30,16 +29,30 @@ Param class setter/getters/constructors
   - VARIABLE
   - V_PARAM
 
-
-
-# To-Do (Other)
-
-Command class executes (Andrew)
-  - (same long list as internal parsers)
+# To-Do (Andrew)
+Command class executes
+  - ADD
+  - SUB
+  - MUL
+  - DIV
+  - ASSIGN
+  - OUT
+  - SET_STR_CHAR
+  - GET_STR_CHAR
+  - LABEL
+  - JMP
+  - JMPZNZ
+  - JMPGTLTE
+  - JMPGTELT
+  - SLEEP
+  - VAR
   
-UML Diagrams (Marlo)
-   - Class/Sequence/Use
-
+  
+# To-Do (Marlo)
+UML Diagrams
+   - Class
+   - Sequence
+   - Use
 
 
 # Additional Notes
