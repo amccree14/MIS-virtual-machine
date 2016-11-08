@@ -27,10 +27,10 @@ Command class parameter creator
 Command class generic addParam(OP_Param_Base pointer) function
   - converts an OP_Param_Base pointer to a shared pointer and pushes it onto the Command class's internal vector
   
-Param class setter/getters/constructors
-  - PARAM
-  - VARIABLE
-  - V_PARAM
+OP_Param_Base class setter/getters/constructors
+  - Params
+  - Variable
+  - V_Param
 
 # To-Do (Andrew)
 Command class executes
