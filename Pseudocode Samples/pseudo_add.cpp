@@ -504,7 +504,23 @@ void C_ASSIGN::execute()
 	
 	if((opList[0]->type == PARAM_TYPE::VAR_NUM) && ((opList[1]->type == PARAM_TYPE::VAR_NUM) || (opList[1]->type == PARAM_TYPE::NUMERIC))) {
 		long long var = *static_cast<long long*>(opList[1]->getValue());
-		opList[0].setValue(static_cast<void*>(&var);
+		opList[0].setValue(static_cast<void*>(&var); }
+				   
+	else if((opList[0]->type == PARAM_TYPE::VAR_REA) && ((opList[1]->type == PARAM_TYPE::VAR_REA) || (opList[1]->type == PARAM_TYPE::REAL))) {
+		double var = *static_cast<double*>(opList[1]->getValue());
+		opList[0].setValue(static_cast<void*>(&var); }
+				   
+	else if((opList[0]->type == PARAM_TYPE::VAR_CHA) && ((opList[1]->type == PARAM_TYPE::VAR_CHA) || (opList[1]->type == PARAM_TYPE::CHAR))) {
+		char var = *static_cast<char*>(opList[1]->getValue());
+		opList[0].setValue(static_cast<void*>(&var); }	
+				   
+	else if((opList[0]->type == PARAM_TYPE::VAR_STR) && ((opList[1]->type == PARAM_TYPE::VAR_STR) || (opList[1]->type == PARAM_TYPE::STR))) {
+		string var = *static_cast<string*>(opList[1]->getValue());
+		opList[0].setValue(static_cast<void*>(&var); }	
+				   
+	else { throw MIS_Exception("ERROR: Invalid storage type! (ASSIGN)\n"); }
+				   
+				   
 }
 
 void C_OUT::execute() {
