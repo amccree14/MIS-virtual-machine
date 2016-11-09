@@ -72,6 +72,6 @@ Debug, Makefile
 
 # Additional Notes
 
-(Arthur, 11/7/16) Yay. Time to create a user-facing interface and start the long debug haul. (update: created user-interface, waiting on completion of rest of code to do full debugging. Partial debug underway)
+(Arthur, 11/8/16) Yay. Time to create a user-facing interface and start the long debug haul. (update: created user-interface, waiting on completion of rest of code to do full debugging. Partial debug underway)
 
 (Arthur, 11/7/16) - Fortunately, it looks like everything we're working on can be split into individual .cpp files, so there's no direct overlap. I'll hammer out the rest of my stuff tonight.
