@@ -10,6 +10,8 @@
 	//		and the remaining parameters being either variables or
 	//		immediate values. We don't care WHAT those values are.
 
+using namespace std;
+
 void C_ADD::execute()
 {
 		// check storage variable type. If it's a NUMERIC type....
@@ -515,9 +517,15 @@ void C_ASSIGN::execute()
 		opList[0].setValue(static_cast<void*>(&var); }	
 				   
 	else if((opList[0]->type == PARAM_TYPE::VAR_STR) && ((opList[1]->type == PARAM_TYPE::VAR_STR) || (opList[1]->type == PARAM_TYPE::STR))) {
-		string var = *static_cast<string*>(opList[1]->getValue());
-		opList[0].setValue(static_cast<void*>(&var); }	
-				   
+		//string var = *static_cast<string*>(opList[0]->getValue());
+		string constant = *static_cast<string*>(opList[1]->getValue());
+		long long size = opList[0]->getSize();
+		
+		if( constant.size() > size ) {
+			throw MIS_Exception("ERROR: Invalid size! (ASSIGN)\n");	}
+		
+		opList[0].setValue(static_cast<void*>(&constant); }
+					
 	else { throw MIS_Exception("ERROR: Invalid storage type! (ASSIGN)\n"); }
 				   
 				   
@@ -555,11 +563,62 @@ void C_GET_STR_CHAR::execute() {
 	
 	return;	
 }
-
-
+				   
+void C_JMP::execute() {
+	
+	long long label = *static_cast<long long*>(opList[0]->getValue());
+	mdata->setPC(label);	
+	
+}
+				   
+void C_JMP_ZNZ::execute() {
+	
+	long long label = *static_cast<long long*>(opList[0]->getValue());
+	long long var = *static_cast<long long*>(opList[1]->getValue());
+	bool zero;
+	
+	if( var == 0 ) {
+		zero = true; }
+	else zero = false;
 	
 	
+	if ((side) && (zero)) {
+		mdata->setPC(label); }
+	
+	else if (!(side) && !(zero)) {
+		mdata->setPC(label); }
 	
 	
+}
+				   
+void C_JMP_GTLTE::execute() {
+	
+	long long label = *static_cast<long long*>(opList[0]->getValue());
+	long long var1 = *static_cast<long long*>(opList[1]->getValue());
+	long long var2 = *static_cast<long long*>(opList[2]->getValue());
+	
+	if( (var1 > var2) && (side) ) {
+		mdata->setPC(label); }
+	
+	else if( !(var1 > var2) && !(side) ) {
+		mdata->setPC(label); }
+	
+}
+				   
+				   
+void C_JMP_GTELT::execute() {
+	
+	long long label = *static_cast<long long*>(opList[0]->getValue());
+	long long var1 = *static_cast<long long*>(opList[1]->getValue());
+	long long var2 = *static_cast<long long*>(opList[2]->getValue());
+	
+	if( (var1 < var2) && (side) ) {
+		mdata->setPC(label); }
+	
+	else if( !(var1 < var2) && !(side) ) {
+		mdata->setPC(label); }	
+	
+	
+}	
 
 	
