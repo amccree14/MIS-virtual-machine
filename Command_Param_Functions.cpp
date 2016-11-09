@@ -217,7 +217,7 @@ static OP_Param_Base* Command::makeParam(std::stringstream& ss)
 					throw MIS_Exception("Error getting variable type-info!\n");
 			}
 			
-			opbp = new Variable<int>(index, t);
+			opbp = new Variable(index, t);
 			return opbp;
 			
 		}
@@ -288,7 +288,7 @@ static OP_Param_Base* Command::makeParam(std::stringstream& ss)
 				ss.str("");
 				ss << st;
 				ss >> val;
-				opbp = new Params<double>(val, PARAM_TYPE::NUMERIC);
+				opbp = new Params<long long>(val, PARAM_TYPE::NUMERIC);
 				return opbp;
 			}
 			

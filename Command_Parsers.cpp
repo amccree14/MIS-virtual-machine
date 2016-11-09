@@ -19,6 +19,7 @@
 #include "Variable.h"
 #include "V_Param.h"
 #include "Command.h"
+#include "Command_Param_Functions.h"
 #include "MIS_Exception.h"
 
 
@@ -33,7 +34,10 @@ Command* C_ADD::parse(std:stringstream ss)
 {
 	Command* ret = new C_ADD(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. ADD.\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -45,9 +49,8 @@ Command* C_ADD::parse(std:stringstream ss)
 	else
 		throw MIS_Exception("Invalid parameter. Parameter 1, ADD.\n");
 		
-	while (ss.good() && ret->oplist.size() < 14)
+	while (op = makeParam(ss) && ret->size() < 14)
 	{
-		op = makeParam(ss);
 		t = op->getType();
 		
 		if (t == PARAM_TYPE::VAR_NUM ||
@@ -68,7 +71,10 @@ Command* C_ADD::parse(std:stringstream ss)
 		throw MIS_Exception("Too many parameters. ADD.\n");
 	}
 	
-	return ret;	
+	if (ret->size() < 3)
+		throw MIS_Exception("Too few parameters. ADD.\n");
+	
+	return ret;
 }
 
 /*****************
@@ -80,7 +86,10 @@ Command* C_SUB::parse(std:stringstream ss)
 {
 	Command* ret = new C_SUB(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. SUB.\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -92,9 +101,8 @@ Command* C_SUB::parse(std:stringstream ss)
 	else
 		throw MIS_Exception("Invalid parameter. Parameter 1, SUB.\n");
 		
-	while (ss.good() && ret->oplist.size() < 4)
+	while (op = makeParam(ss) && ret->size() < 4)
 	{
-		op = makeParam(ss);
 		t = op->getType();
 		
 		if (t == PARAM_TYPE::VAR_NUM ||
@@ -115,6 +123,9 @@ Command* C_SUB::parse(std:stringstream ss)
 		throw MIS_Exception("Too many parameters. SUB.\n");
 	}
 	
+	if (ret->size() < 3)
+		throw MIS_Exception("Too few parameters. SUB.\n");
+	
 	return ret;
 }
 
@@ -127,7 +138,10 @@ Command* C_MUL::parse(std:stringstream ss)
 {
 	Command* ret = new C_MUL(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. MUL.\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -139,9 +153,8 @@ Command* C_MUL::parse(std:stringstream ss)
 	else
 		throw MIS_Exception("Invalid parameter. Parameter 1, MUL.\n");
 		
-	while (ss.good() && ret->oplist.size() < 14)
+	while (op = makeParam(ss) && ret->size() < 14)
 	{
-		op = makeParam(ss);
 		t = op->getType();
 		
 		if (t == PARAM_TYPE::VAR_NUM ||
@@ -162,6 +175,9 @@ Command* C_MUL::parse(std:stringstream ss)
 		throw MIS_Exception("Too many parameters. MUL.\n");
 	}
 	
+	if (ret->size() < 3)
+		throw MIS_Exception("Too few parameters. MUL.\n");
+	
 	return ret;
 }
 
@@ -174,7 +190,10 @@ Command* C_DIV::parse(std:stringstream ss)
 {
 	Command* ret = new C_DIV(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. DIV.\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -186,9 +205,8 @@ Command* C_DIV::parse(std:stringstream ss)
 	else
 		throw MIS_Exception("Invalid parameter. Parameter 1, DIV.\n");
 		
-	while (ss.good() && ret->oplist.size() < 4)
+	while (op = makeParam(ss) && ret->size() < 4)
 	{
-		op = makeParam(ss);
 		t = op->getType();
 		
 		if (t == PARAM_TYPE::VAR_NUM ||
@@ -209,6 +227,9 @@ Command* C_DIV::parse(std:stringstream ss)
 		throw MIS_Exception("Too many parameters. DIV.\n");
 	}
 	
+	if (ret->size() < 3)
+		throw MIS_Exception("Too few parameters. DIV.\n");
+	
 	return ret;
 }
 
@@ -221,7 +242,10 @@ Command* C_ASSIGN::parse(std:stringstream ss)
 {
 	Command* ret = new C_ASSIGN(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. ASSIGN.\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -236,9 +260,8 @@ Command* C_ASSIGN::parse(std:stringstream ss)
 		throw MIS_Exception("Invalid parameter. Parameter 1, ASSIGN.\n");
 
 	
-	if (ss.good())
-		op = makeParam(ss);
-		
+	if (op = makeParam(ss))
+	{
 		switch(t)
 		{
 			case PARAM_TYPE::VAR_REA:
@@ -292,13 +315,19 @@ Command* C_ASSIGN::parse(std:stringstream ss)
 			default:
 				throw MIS_Exception("Parameter parse failure. ASSIGN.\n");		
 		}
+	}
+	else
+		throw MIS_Exception("No assignment parameter found. ASSIGN.\n")
 	
 	std::string st;
 	ss >> st;
 	if (!st.empty())
 	{
-		throw MIS_Exception("Too many parameters. SUB.\n");
+		throw MIS_Exception("Too many parameters. ASSIGN.\n");
 	}
+	
+	if (ret->size() < 2)
+		throw MIS_Exception("Too few parameters. ASSIGN.\n");
 	
 	return ret;
 }
@@ -312,15 +341,17 @@ Command* C_OUT::parse(std:stringstream ss)
 {
 	Command* ret = new C_OUT(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. OUT.\n");
 	
 	PARAM_TYPE t = op->getType();
 	
 	ret->addParam(op);	
 
-	while (ss.good() && ret->oplist.size() < 14)
+	while (op = makeParam(ss) && ret->size() < 14)
 	{
-		op = makeParam(ss);
 		t = op->getType();
 
 		ret->addParam(op);
@@ -332,6 +363,10 @@ Command* C_OUT::parse(std:stringstream ss)
 	{
 		throw MIS_Exception("Too many parameters. DIV.\n");
 	}
+	
+	
+	if (ret->size() < 1)
+		throw MIS_Exception("Too few parameters. SUB.\n");
 	
 	return ret;
 }
@@ -345,9 +380,14 @@ Command* C_SET_STR_CHAR::parse(std:stringstream ss)
 {
 	Command* ret = new C_SET_STR_CHAR(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. SET_STR_CHAR.\n");
 	
 	PARAM_TYPE t = op->getType();
+	
+	
 	
 	if (t == PARAM_TYPE::VAR_STR )
 	{
@@ -356,8 +396,11 @@ Command* C_SET_STR_CHAR::parse(std:stringstream ss)
 	else
 		throw MIS_Exception("Invalid parameter. Parameter 1, SET_STR_CHAR.\n");
 		
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 2,"
+							" SET_STR_CHAR.\n");
 	
 	if (t == PARAM_TYPE::VAR_NUM ||
 		t == PARAM_TYPE::NUMERIC )
@@ -368,8 +411,11 @@ Command* C_SET_STR_CHAR::parse(std:stringstream ss)
 		throw MIS_Exception("Invalid parameter. Parameter 2, SET_STR_CHAR.\n");
 		
 		
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 3,"
+							" SET_STR_CHAR.\n");
 	
 	if (t == PARAM_TYPE::VAR_CHAR ||
 		t == PARAM_TYPE::CHAR )
@@ -386,6 +432,9 @@ Command* C_SET_STR_CHAR::parse(std:stringstream ss)
 		throw MIS_Exception("Too many parameters. SET_STR_CHAR.\n");
 	}
 	
+	if (ret->size() < 3)
+		throw MIS_Exception("Too few parameters. SET_STR_CHAR.\n");
+	
 	return ret;
 }
 
@@ -398,19 +447,27 @@ Command* C_GET_STR_CHAR::parse(std:stringstream ss)
 {
 	Command* ret = new C_GET_STR_CHAR(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
 	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. GET_STR_CHAR.\n");
+		
 	PARAM_TYPE t = op->getType();
+
 	
+		
 	if (t == PARAM_TYPE::VAR_STR )
 	{
 		ret->addParam(op);	
 	}
 	else
-		throw MIS_Exception("Invalid parameter. Parameter 1, SET_STR_CHAR.\n");
+		throw MIS_Exception("Invalid parameter. Parameter 1, GET_STR_CHAR.\n");
 		
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 2,"
+							" GET_STR_CHAR.\n");
 	
 	if (t == PARAM_TYPE::VAR_NUM ||
 		t == PARAM_TYPE::NUMERIC )
@@ -418,25 +475,31 @@ Command* C_GET_STR_CHAR::parse(std:stringstream ss)
 		ret->addParam(op);	
 	}
 	else
-		throw MIS_Exception("Invalid parameter. Parameter 2, SET_STR_CHAR.\n");
+		throw MIS_Exception("Invalid parameter. Parameter 2, GET_STR_CHAR.\n");
 		
 		
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 3,"
+							" GET_STR_CHAR.\n");
 	
 	if (t == PARAM_TYPE::VAR_CHAR )
 	{
 		ret->addParam(op);	
 	}
 	else
-		throw MIS_Exception("Invalid parameter. Parameter 3, SET_STR_CHAR.\n");
+		throw MIS_Exception("Invalid parameter. Parameter 3, GET_STR_CHAR.\n");
 	
 	std::string st;
 	ss >> st;
 	if (!st.empty())
 	{
-		throw MIS_Exception("Too many parameters. SET_STR_CHAR.\n");
+		throw MIS_Exception("Too many parameters. GET_STR_CHAR.\n");
 	}
+	
+	if (ret->size() < 3)
+		throw MIS_Exception("Too few parameters. GET_STR_CHAR.\n");
 	
 	return ret;
 }
@@ -450,7 +513,10 @@ Command* C_SLEEP::parse(std:stringstream ss)
 {
 	Command* ret = new C_SLEEP(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. SLEEP.\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -469,6 +535,9 @@ Command* C_SLEEP::parse(std:stringstream ss)
 	{
 		throw MIS_Exception("Too many parameters. SLEEP.\n");
 	}
+	
+	if (ret->size() < 1)
+		throw MIS_Exception("Too few parameters. SLEEP.\n");
 	
 	return ret;
 }
@@ -495,7 +564,10 @@ Command* C_JMP::parse(std:stringstream ss)
 {
 	Command* ret = new C_JMP(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. JMP.\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -514,6 +586,9 @@ Command* C_JMP::parse(std:stringstream ss)
 		throw MIS_Exception("Too many parameters. JMP.\n");
 	}
 	
+	if (ret->size() < 1)
+		throw MIS_Exception("Too few parameters. JMP.\n");
+	
 	return ret;
 }
 
@@ -526,7 +601,11 @@ Command* C_JMP_ZNZ::parse(std:stringstream ss)
 {
 	Command* ret = new C_JMP_ZNZ(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. JMP(Z/NZ).\n");
+		
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -538,8 +617,11 @@ Command* C_JMP_ZNZ::parse(std:stringstream ss)
 		throw MIS_Exception("Invalid parameter. Parameter 1, JMP(Z/NZ).\n");
 
 
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 2,"
+							" JMP(Z/NZ).\n");
 	
 	if (t == PARAM_TYPE::NUMERIC ||
 		t == PARAM_TYPE::VAR_NUM )
@@ -556,6 +638,9 @@ Command* C_JMP_ZNZ::parse(std:stringstream ss)
 		throw MIS_Exception("Too many parameters. JMP(Z/NZ).\n");
 	}
 	
+	if (ret->size() < 2)
+		throw MIS_Exception("Too few parameters. JMP(Z/NZ).\n");
+	
 	return ret;
 }
 
@@ -568,7 +653,10 @@ Command* C_JMP_GTLTE::parse(std:stringstream ss)
 {
 	Command* ret = new C_JMP_GTLTE(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. JMP(GT/LT).\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -580,8 +668,11 @@ Command* C_JMP_GTLTE::parse(std:stringstream ss)
 		throw MIS_Exception("Invalid parameter. Parameter 1, JMP(GT/LT).\n");
 
 
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 2,"
+							" JMP(GT/LT).\n");
 	
 	if (t == PARAM_TYPE::NUMERIC ||
 		t == PARAM_TYPE::VAR_NUM )
@@ -592,8 +683,11 @@ Command* C_JMP_GTLTE::parse(std:stringstream ss)
 		throw MIS_Exception("Invalid parameter. Parameter 2, JMP(GT/LT).\n");
 		
 		
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 3,"
+							" JMP(GT/LT).\n");
 	
 	if (t == PARAM_TYPE::NUMERIC ||
 		t == PARAM_TYPE::VAR_NUM )
@@ -610,6 +704,9 @@ Command* C_JMP_GTLTE::parse(std:stringstream ss)
 	{
 		throw MIS_Exception("Too many parameters. JMP(GT/LT).\n");
 	}
+	
+	if (ret->size() < 3)
+		throw MIS_Exception("Too few parameters. JMP(GT/LT).\n");
 	
 	return ret;
 }
@@ -623,7 +720,10 @@ Command* C_JMP_GTELT::parse(std:stringstream ss)
 {
 	Command* ret = new C_JMP_GTELT(mdata);
 	
-	OP_Param_Base* op = makeParam(ss);
+	OP_Param_Base* op;
+	
+	if (!(op = makeParam(ss)))
+		throw MIS_Exception("No parameters found. JMP(GT/LT).\n");
 	
 	PARAM_TYPE t = op->getType();
 	
@@ -635,8 +735,11 @@ Command* C_JMP_GTELT::parse(std:stringstream ss)
 		throw MIS_Exception("Invalid parameter. Parameter 1, JMP(GT/LT).\n");
 
 
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 2,"
+							" JMP(GT/LT).\n");
 	
 	if (t == PARAM_TYPE::NUMERIC ||
 		t == PARAM_TYPE::VAR_NUM )
@@ -647,8 +750,11 @@ Command* C_JMP_GTELT::parse(std:stringstream ss)
 		throw MIS_Exception("Invalid parameter. Parameter 2, JMP(GT/LT).\n");
 		
 		
-	op = makeParam(ss);
-	t = op->getType();
+	if (op = makeParam(ss))
+		t = op->getType();
+	else
+		throw MIS_Exception("Parameter not found. Parameter 3,"
+							" JMP(GT/LT).\n");
 	
 	if (t == PARAM_TYPE::NUMERIC ||
 		t == PARAM_TYPE::VAR_NUM )
@@ -665,6 +771,9 @@ Command* C_JMP_GTELT::parse(std:stringstream ss)
 	{
 		throw MIS_Exception("Too many parameters. JMP(GT/LT).\n");
 	}
+	
+	if (ret->size() < 3)
+		throw MIS_Exception("Too few parameters. JMP(GT/LT).\n");
 	
 	return ret;
 }
@@ -715,6 +824,9 @@ Command* C_LABEL::parse(std:stringstream ss)
 
 	if (mdata->labels.find(st) != std::map::end)
 		throw MIS_Exception("Label already exists!\n");
+		
+	if (st.empty())
+		throw MIS_Exception("No label name was passed!\n");
 	
 	mdata->labels[st] = mdata->PC;
 	
@@ -725,6 +837,9 @@ Command* C_LABEL::parse(std:stringstream ss)
 	{
 		throw MIS_Exception("Too many parameters. LABEL.\n");
 	}
+	
+	if (ret->size() < 1)
+		throw MIS_Exception("Too few parameters. LABEL.\n");
 	
 	return ret;	
 }
@@ -770,7 +885,8 @@ Command* C_VAR::parse(std:stringstream ss)
 		// check for non-alphanumeric characters		
 			for (int i = 0; i < st.size(); ++i)
 				if (!(isalnum(st[i])))
-					throw MIS_Exception("Invalid characters in variable name!\n");
+					throw MIS_Exception("Invalid characters in variable "
+										"name!\n");
 			
 				// CHECK IF VARIABLE EXISTS
 			
@@ -781,7 +897,7 @@ Command* C_VAR::parse(std:stringstream ss)
 			std::string varname = st;
 			
 			
-	/////////////////////////////// parameter 2 ////////////
+		/////////////////////// parameter 2 ////////////////////////
 			
 				// clear front-side whitespace
 			while (ss.peek() == ' ' || ss.peek() == '\t')
@@ -805,6 +921,11 @@ Command* C_VAR::parse(std:stringstream ss)
 
 			int index = mdata->variables.size();		// get index of new var
 							
+			
+			
+			
+		/////////////////////// parameter 3 and 4 ////////////////////////
+			
 				// create the variable and v_param objects for the vectors
 				//	and maps
 			switch(st)
@@ -814,10 +935,29 @@ Command* C_VAR::parse(std:stringstream ss)
 												PARAM_TYPE::NUMERIC)
 					std::shared_ptr<Variable> va(new Variable(index,
 												PARAM_TYPE::VAR_NUM)
-					mdata->variables.push_back(vp);
+					mdata->variables.push_back(vp);		// store variable data
+					mdata->varNames[varname] = index;	// store variable index
 					
 					
 					
+					
+					
+					OP_Param_Base* op1, op2;
+					
+					op1 = makeParam(ss);
+					if (op2 = makeParam(ss))
+					{
+						throw MIS_Exception("Invalid (too many) parameters"
+												" for VAR!\n");
+					}
+					else
+					{
+						if (op1->getType() != PARAM_TYPE::NUMERIC)
+							throw MIS_Exception("Invalid parameter"
+												" for VAR!\n");
+						
+						mdata->variables[index]->setValue(op1->getValue());					
+					}
 					
 					
 					
@@ -825,92 +965,133 @@ Command* C_VAR::parse(std:stringstream ss)
 					
 					
 				case "REAL":
-					std::shared_ptr<V_Param> vp(new V_Param(0.0,
+					std::shared_ptr<V_Param> vp(new V_Param<double>(0.0,
 												PARAM_TYPE::REAL)
 					std::shared_ptr<Variable> va(new Variable(index,
 												PARAM_TYPE::VAR_REAL)
-					mdata->variables.push_back(vp);
+					mdata->variables.push_back(vp);		// store variable data
+					mdata->varNames[varname] = index;	// store variable index
 					
 					
+					
+					OP_Param_Base* op1, op2;
+					
+					op1 = makeParam(ss);
+					if (op2 = makeParam(ss))
+					{
+						throw MIS_Exception("Invalid (too many) parameters"
+												" for VAR!\n");
+					}
+					else
+					{
+						if (op1->getType() != PARAM_TYPE::REAL)
+							throw MIS_Exception("Invalid parameter"
+												" for VAR!\n");
+						
+						mdata->variables[index]->setValue(op1->getValue());					
+					}
 					
 					
 					break;
 					
 					
 				case "CHAR":
-					std::shared_ptr<V_Param> vp(new V_Param('',
+					std::shared_ptr<V_Param> vp(new V_Param<char>('',
 												PARAM_TYPE::CHAR)
 					std::shared_ptr<Variable> va(new Variable(index,
 												PARAM_TYPE::VAR_CHA)
-					mdata->variables.push_back(vp);
+					mdata->variables.push_back(vp);		// store variable data
+					mdata->varNames[varname] = index;	// store variable index		
 					
 					
+
+					OP_Param_Base* op1, op2;
 					
-					
+					op1 = makeParam(ss);
+					if (op2 = makeParam(ss))
+					{
+						throw MIS_Exception("Invalid (too many) parameters"
+												" for VAR!\n");
+					}
+					else
+					{
+						if (op1->getType() != PARAM_TYPE::CHAR)
+							throw MIS_Exception("Invalid parameter"
+												" for VAR!\n");
+						
+						mdata->variables[index]->setValue(op1->getValue());					
+					}
+								
 					
 					break;
 					
 					
 				case "STRING":
-					std::shared_ptr<V_Param> vp(new V_Param("",
+					std::shared_ptr<V_Param> vp(new V_Param<std::string>("",
 												PARAM_TYPE::STRING)
 					std::shared_ptr<Variable> va(new Variable(index,
 												PARAM_TYPE::VAR_STR)
-					mdata->variables.push_back(vp);
+					mdata->variables.push_back(vp);		// store variable data
+					mdata->varNames[varname] = index;	// store variable index			
+
 					
 					
+					OP_Param_Base* op1, op2;
 					
+					op1 = makeParam(ss);
+					if (op2 = makeParam(ss))
+					{
+						if (makeParam(ss))
+							throw MIS_Exception("Invalid (too many) parameters"
+												" for VAR!\n");
+						if (op1->getType() != PARAM_TYPE::NUMERIC ||
+							op2->getType() !- PARAM_TYPE::STRING )
+						{
+							throw MIS_Exception("Invalid parameters"
+												" for VAR!\n");
+						}
+						long long temp = *static_cast<long long*>
+											(op1->getValue());
+						std::string stemp = *static_cast<std::string*>
+											(op2->getValue());
+						
+						if (stemp.size() > temp)
+							throw MIS_Exception("Invalid parameters"
+												" for VAR!\n");
+							
+						
+						mdata->variables[index]->setSize(temp);
+						mdata->variables[index]->setValue(static_cast<void*>
+															(&stemp));
+						
+					}
+					else
+					{
+						if (op1->getType() != PARAM_TYPE::STRING)
+							throw MIS_Exception("Invalid parameter"
+												" for VAR!\n");
+						
+						mdata->variables[index]->setValue(op1->getValue());					
+					}
 					
-					
-					
+										
 					break;
 					
 					
 				default:
 					throw MIS_Exception("Invalid variable type!\n");
-			}
-					
+			}			
 			
+		}
+		else
+			throw MIS_Exception("Invalid variable parameters!\n");
 			
-			
-			
-			
-			
-			
-			
-			mdata->labels[st] = mdata->PC;
-			
-			
-			st.clear()
-			ss >> st;
-			if (!st.empty())
-			{
-				throw MIS_Exception("Too many parameters. LABEL.\n");
-			}	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-				
-			
-			opbp = new Variable<int>(index, t);
-			return opbp;
+	}
+	else
+		throw MIS_Exception("Invalid variable parameters!\n");
 		
-		
+
+	return ret;		
 }
-
-
-
-
-
-int index = mdata->varNames.at(st);
-
 
 
