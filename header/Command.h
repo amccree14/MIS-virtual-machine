@@ -65,6 +65,8 @@ class Command
 											// static function in the class
 											//	that parses a string and
 											//	creates a parameter from it
+	
+		static int size(){return oplist.size();}				// static function for # of parameters
 		
 		
 		virtual void execute();			// calls op and passes it parameters
