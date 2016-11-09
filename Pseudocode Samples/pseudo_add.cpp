@@ -1,16 +1,18 @@
-/**************************
-*
-*	Sample code, do not assume this will work as is, because it is
-*		untested in its current form.
-*
-**************************/
+#include <vector>
+#include <string>
+#include <sstream>
+#include <memory>
+
+#include "Command.h"
+#include "MIS_System_Data.h"
+#include "OP_Param_Base.h"
+#include "MIS_Exception.h"
 
 
 	// add takes 3-13 parameters, with the first parameter being a variable
 	//		and the remaining parameters being either variables or
 	//		immediate values. We don't care WHAT those values are.
 
-using namespace std;
 
 void C_ADD::execute()
 {
