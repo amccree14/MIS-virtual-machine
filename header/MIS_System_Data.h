@@ -47,8 +47,8 @@ class MIS_System_Data
 		
 		
 			// these functions MAY be needed for future locking capabilities
-		int getPC();				// this is how to get the current PC
-		void setPC(int);			// this is how to set the current PC
+		long long getPC(){return PC;}			// get the current PC
+		void setPC(long long val){PC = val;}	// set the current PC
 };
 
 

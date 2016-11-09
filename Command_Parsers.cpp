@@ -828,7 +828,7 @@ Command* C_LABEL::parse(std:stringstream ss)
 	if (st.empty())
 		throw MIS_Exception("No label name was passed!\n");
 	
-	mdata->labels[st] = mdata->PC;
+	mdata->labels[st] = mdata->getPC();
 	
 	
 	st.clear()
