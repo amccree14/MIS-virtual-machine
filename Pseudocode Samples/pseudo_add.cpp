@@ -272,9 +272,9 @@ void C_SUB::execute()
 	else { throw MIS_Exception("ERROR: Invalid storage type! (ADD)\n"); }
 		
 	
-	return;	
-	}	
 	
+	}	
+	return;
 }
 
 void C_DIV::execute()
@@ -405,9 +405,8 @@ void C_DIV::execute()
 		else { throw MIS_Exception("ERROR: Invalid storage type! (ADD)\n"); }
 		
 	
-	return;	
 	}	
-	
+	return;
 }
 
 void C_MUL::execute() {
@@ -528,6 +527,8 @@ void C_ASSIGN::execute()
 					
 	else { throw MIS_Exception("ERROR: Invalid storage type! (ASSIGN)\n"); }
 				   
+	return;			   
+				   
 				   
 }
 
@@ -567,7 +568,8 @@ void C_GET_STR_CHAR::execute() {
 void C_JMP::execute() {
 	
 	long long label = *static_cast<long long*>(opList[0]->getValue());
-	mdata->setPC(label);	
+	mdata->setPC(label);
+	return;
 	
 }
 				   
@@ -587,6 +589,7 @@ void C_JMP_ZNZ::execute() {
 	
 	else if (!(side) && !(zero)) {
 		mdata->setPC(label); }
+	return;
 	
 	
 }
@@ -602,6 +605,7 @@ void C_JMP_GTLTE::execute() {
 	
 	else if( !(var1 > var2) && !(side) ) {
 		mdata->setPC(label); }
+	return;
 	
 }
 				   
@@ -617,8 +621,28 @@ void C_JMP_GTELT::execute() {
 	
 	else if( !(var1 < var2) && !(side) ) {
 		mdata->setPC(label); }	
+	return;
 	
 	
 }	
-
+				   
+void C_SLEEP::execute() {
 	
+	long long var = *static_cast<long long*>(opList[0]->getValue());
+	sleep(var);
+	return;
+	
+}
+
+void C_LABEL::execute() {
+	
+	throw MIS_Exception("ERROR: Attempting to execute label (non- executable)! (LABEL)\n");
+	
+}
+				   
+				   
+void C_VAR::execute() {
+	
+	throw MIS_Exception("ERROR: Attempting to execute VAR (non-executable)! (VAR)\n");				   
+	
+}
