@@ -108,6 +108,9 @@ void MIS_System::parse(char* filename)
 		// open file w/ c-style string filename
 	ifs.open (filename, std::ifstream::in);
 	
+	if (ifs.fail())
+		throw MIS_Exception("File could not be opened.\n");
+	
 		// while file input stream is okay
 	while (ifs.good())
 	{
