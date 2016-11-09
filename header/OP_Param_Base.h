@@ -44,8 +44,8 @@ class OP_Param_Base
 		virtual void setValue(void*);
 	
 			// these size functions are for the STRING variables
-		void setSize(long long);
-		long long getSize();
+		void setSize(long long val){max_size = val;}
+		long long getSize(){return max_size;}
 		
 			// return type of this parameter
 		OP_TYPE getType(){return type;}

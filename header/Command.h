@@ -8,7 +8,8 @@
 *
 * Details:
 *	- The methods declared in this header file are
-*		implemented in Command.cpp and Command_addParam.cpp.
+*		implemented in Command_Param_Functions.cpp, Command_Parsers.cpp,
+*		Command_Execute.cpp
 *
 *	- This file contains the declaration for the Command class, as well
 *		as includes the header for all of the functions to be executed within

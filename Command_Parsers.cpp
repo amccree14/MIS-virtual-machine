@@ -798,7 +798,7 @@ Command* C_JMP_GTELT::parse(std:stringstream ss)
 *****************/
 Command* C_LABEL::parse(std:stringstream ss)
 {
-	Command* ret = 0;
+	Command* ret = nullptr;
 	std::string st;
 	st.clear();
 	
@@ -822,13 +822,13 @@ Command* C_LABEL::parse(std:stringstream ss)
 		if (!(isalnum(st[i])))
 			throw MIS_Exception("Invalid label!\n");
 
-	if (mdata->labels.find(st) != std::map::end)
-		throw MIS_Exception("Label already exists!\n");
-		
 	if (st.empty())
 		throw MIS_Exception("No label name was passed!\n");
+			
+	if (mdata->labels.find(st) != std::map::end)
+		throw MIS_Exception("Label already exists!\n");
 	
-	mdata->labels[st] = mdata->getPC();
+	mdata->labels[st] = mdata->commands.size();
 	
 	
 	st.clear()
@@ -837,9 +837,6 @@ Command* C_LABEL::parse(std:stringstream ss)
 	{
 		throw MIS_Exception("Too many parameters. LABEL.\n");
 	}
-	
-	if (ret->size() < 1)
-		throw MIS_Exception("Too few parameters. LABEL.\n");
 	
 	return ret;	
 }
@@ -851,7 +848,7 @@ Command* C_LABEL::parse(std:stringstream ss)
 *****************/
 Command* C_VAR::parse(std:stringstream ss)
 {
-	Command* ret = 0;
+	Command* ret = nullptr;
 		// create a storage string and empty it
 	std::string st;	
 	st.clear();
@@ -889,6 +886,8 @@ Command* C_VAR::parse(std:stringstream ss)
 										"name!\n");
 			
 				// CHECK IF VARIABLE EXISTS
+			if (st.empty())
+				throw MIS_Exception("No variable name was passed!\n");
 			
 			if (mdata->varNames.find(st) != std::map::end)
 				throw MIS_Exception("Variable name is already in use!\n");
@@ -934,7 +933,7 @@ Command* C_VAR::parse(std:stringstream ss)
 					std::shared_ptr<V_Param> vp(new V_Param<long long>(0,
 												PARAM_TYPE::NUMERIC)
 					std::shared_ptr<Variable> va(new Variable(index,
-												PARAM_TYPE::VAR_NUM)
+												PARAM_TYPE::VAR_NUM, mdata)
 					mdata->variables.push_back(vp);		// store variable data
 					mdata->varNames[varname] = index;	// store variable index
 					
@@ -968,7 +967,7 @@ Command* C_VAR::parse(std:stringstream ss)
 					std::shared_ptr<V_Param> vp(new V_Param<double>(0.0,
 												PARAM_TYPE::REAL)
 					std::shared_ptr<Variable> va(new Variable(index,
-												PARAM_TYPE::VAR_REAL)
+												PARAM_TYPE::VAR_REAL, mdata)
 					mdata->variables.push_back(vp);		// store variable data
 					mdata->varNames[varname] = index;	// store variable index
 					
@@ -999,7 +998,7 @@ Command* C_VAR::parse(std:stringstream ss)
 					std::shared_ptr<V_Param> vp(new V_Param<char>('',
 												PARAM_TYPE::CHAR)
 					std::shared_ptr<Variable> va(new Variable(index,
-												PARAM_TYPE::VAR_CHA)
+												PARAM_TYPE::VAR_CHA, mdata)
 					mdata->variables.push_back(vp);		// store variable data
 					mdata->varNames[varname] = index;	// store variable index		
 					
@@ -1030,7 +1029,7 @@ Command* C_VAR::parse(std:stringstream ss)
 					std::shared_ptr<V_Param> vp(new V_Param<std::string>("",
 												PARAM_TYPE::STRING)
 					std::shared_ptr<Variable> va(new Variable(index,
-												PARAM_TYPE::VAR_STR)
+												PARAM_TYPE::VAR_STR, mdata)
 					mdata->variables.push_back(vp);		// store variable data
 					mdata->varNames[varname] = index;	// store variable index			
 

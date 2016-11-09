@@ -160,7 +160,28 @@ void MIS_System::parse(char* filename)
 						// Certain command objects, like VAR and LABEL
 						//	do not populate the command vector, but instead
 						//	add values to their respective vectors or maps.
-					objf.at(temp)->parse(ss);
+					try
+					{
+							// get Command* to store returned pointer from objf
+						Command* cp;						
+							// if the object was created and passed back
+							//	a non-nullptr, then convert it to shared_ptr
+							//	and push it onto the command vector.
+							// otherwise it was a LABEL or VAR and should
+							//	not be added to the command vector.
+						if (cp = objf.at(temp)->parse(ss))
+						{
+							std::shared_ptr<Command> scp(cp);
+							mdata.commands.push_back(scp);
+						}
+					}
+					catch (MIS_Exception ex)
+					{
+						throw MIS_Exception("Error" + ex.what()
+											+ " - Line #" 
+											+ std::to_string(linenumber) 
+											+ ".\n");
+					}
 				}
 			}
 		}	// if no token match was found in the map, then catch the exception
@@ -207,9 +228,14 @@ void MIS_System::parse(char* filename)
 
 void MIS_System::run()
 {
-	for (int i = 0; i < mdata.commands.size(); ++i)
+		// set PC to 0 in preparation for execution phase.
+	mdata.setPC(0);
+		
+		// loop through entire command vector using PC as index and
+		//	call execute from each element
+	for (; mdata.getPC() < mdata.commands.size(); mdata.setPC(mdata.getPC()+1))
 	{
-		mdata.commands[i]->execute();
+		mdata.commands[mdata.getPC()]->execute();
 	}
 }	
 
