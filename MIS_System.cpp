@@ -65,11 +65,11 @@ void MIS_System::parse(char* filename)
 	
 	objf["JMP"].reset(new C_JMP(&mdata));
 	
-	objf["JMPZ"].reset(new C_JMP_Z(&mdata, true));
+	objf["JMPZ"].reset(new C_JMP_ZNZ(&mdata, true));
 	objf["JMPGT"].reset(new C_JMP_GTLTE(&mdata, true));
 	objf["JMPGTE"].reset(new C_JMP_GTELT(&mdata, true));
 	
-	objf["JMPNZ"].reset(new C_JMP_Z(&mdata, false));
+	objf["JMPNZ"].reset(new C_JMP_ZNZ(&mdata, false));
 	objf["JMPLTE"].reset(new C_JMP_GTLTE(&mdata, false));
 	objf["JMPLT"].reset(new C_JMP_GTELT(&mdata, false));
 	
