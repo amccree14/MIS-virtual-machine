@@ -3,7 +3,7 @@ CS109 project
 
 
 # To-Do (Arthur)
-Command class internal parsers (done 11/8)
+Command class internal parsers ***(complete 11/8)***
   - ~~ADD~~
   - ~~SUB~~
   - ~~MUL~~
@@ -22,14 +22,14 @@ Command class internal parsers (done 11/8)
   
   *VAR and LABEL are special case commands that are not added to the command vector and are execute on the spot*
   
-Command class parameter creator (done 11/7)
+Command class parameter creator ***(complete 11/7)***
   - ~~Takes a parameter and parses it into a PARAM object, returns an OP_PARAM_BASE pointer~~
   - ~~It is expected that the parsers all check the returned OP_PARAM_BASE pointers for acceptable parameter types for their opcodes~~
   
-Command class generic addParam(OP_Param_Base pointer) function (done 11/8)
+Command class generic addParam(OP_Param_Base pointer) function ***(complete 11/8)***
   - ~~converts an OP_Param_Base pointer to a shared pointer and pushes it onto the Command class's internal vector~~
   
-OP_Param_Base class setter/getters/constructors (done 11/8)
+OP_Param_Base class setter/getters/constructors ***(complete 11/8)***
   - ~~Params~~
   - ~~Variable~~
   - ~~V_Param~~
