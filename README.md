@@ -33,6 +33,9 @@ OP_Param_Base class setter/getters/constructors ***(complete 11/8)***
   - ~~Params~~
   - ~~Variable~~
   - ~~V_Param~~
+  
+Create user-facing interface and MIS_System wrapper ***(complete 11/8)***
+  - ~~MIS.cpp~~
 
 # To-Do (Andrew)
 Command class executes
