@@ -28,7 +28,6 @@
 #include <memory>	// shared_ptr
 
 #include "MIS_System_Data.h"	// all the necessary data members
-#include "OP_System_Data.h"
 #include "MAXMIN_ENUM.h"		// enum lists for the parameter adding
 
 
@@ -39,7 +38,7 @@ class Command
 											// vector of operands for function
 		std::vector<std::shared_ptr<OP_Param_Base>> oplist;
 		
-		OP_System_Data* mdata;
+		MIS_System_Data* mdata;
 											
 	
 	
@@ -104,69 +103,69 @@ class Command
 class C_ADD: public Command
 {
 	public:
-		C_ADD(OP_System_Data* data):Command(data){}
+		C_ADD(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_SUB: public Command
 {
 	public:
-		C_SUB(OP_System_Data* data):Command(data){}
+		C_SUB(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_MUL: public Command
 {
 	public:
-		C_MUL(OP_System_Data* data):Command(data){}
+		C_MUL(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_DIV: public Command
 {
 	public:
-		C_DIV(OP_System_Data* data):Command(data){}
+		C_DIV(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_ASSIGN: public Command
 {
 	public:
-		C_ASSIGN(OP_System_Data* data):Command(data){}
+		C_ASSIGN(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_OUT: public Command
 {
 	public:
-		C_OUT(OP_System_Data* data):Command(data){}
+		C_OUT(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_SET_STR_CHAR: public Command
 {
 	public:
-		C_SET_STR_CHAR(OP_System_Data* data):Command(data){}
+		C_SET_STR_CHAR(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_GET_STR_CHAR: public Command
 {
 	public:
-		C_GET_STR_CHAR(OP_System_Data* data):Command(data){}
+		C_GET_STR_CHAR(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_LABEL: public Command
 {
 	public:
-		C_LABEL(OP_System_Data* data):Command(data){}
+		C_LABEL(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
 class C_SLEEP: public Command{
 	public:
-		C_SLEEP(OP_System_Data* data):Command(data){}
+		C_SLEEP(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
@@ -188,7 +187,7 @@ class C_JMP: public Command
 	private:
 		bool side;		// used for zero/non-zero or gt/lt or gte/lte
 	public:
-		C_JMP(OP_System_Data* data):Command(data){}
+		C_JMP(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
@@ -196,7 +195,7 @@ class C_JMP_ZNZ: public C_JMP
 {
 	public:
 			// basic constructor to set the boolean
-		C_JMP_ZNZ(OP_System_Data* data, bool b):C_JMP(data), side(b){}
+		C_JMP_ZNZ(MIS_System_Data* data, bool b):C_JMP(data), side(b){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
@@ -204,7 +203,7 @@ class C_JMP_GTLTE: public C_JMP
 {
 	public:
 			// basic constructor to set the boolean
-		C_JMP_GTLTE(OP_System_Data* data, bool b):C_JMP(data), side(b){}
+		C_JMP_GTLTE(MIS_System_Data* data, bool b):C_JMP(data), side(b){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
@@ -212,7 +211,7 @@ class C_JMP_GTELT: public C_JMP
 {
 	public:
 			// basic constructor to set the boolean
-		C_JMP_GTELT(OP_System_Data* data, bool b):C_JMP(data), side(b){}
+		C_JMP_GTELT(MIS_System_Data* data, bool b):C_JMP(data), side(b){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
@@ -224,7 +223,7 @@ class C_JMP_GTELT: public C_JMP
 class C_VAR: public Command
 {
 	public:
-		C_VAR(OP_System_Data* data):Command(data){}
+		C_VAR(MIS_System_Data* data):Command(data){}
 		execute();
 		Command* parse(std:stringstream ss);	
 };
