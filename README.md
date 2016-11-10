@@ -62,15 +62,15 @@ Command class executes ***(complete 11/9)***
   - ~~SLEEP~~
   
   
-## To-Do (Marlo) ***(complete 11/9)***
-UML Diagrams
+## To-Do (Marlo) 
+UML Diagrams ***(complete 11/9)***
    - ~~Class~~
    - ~~Sequence~~
    - ~~Use~~
    
    
-## To-Do (Other) ***(complete 11/9)***
-~~Debug~~, ~~Makefile~~
+## To-Do (Other) 
+~~Debug~~, ~~Makefile~~ ***(complete 11/9)***
 
 ## Known Issues
   - Submitted revision *may* not compile on some systems. Release 0.1 has an overloaded function in the std namespace, which causes undefined behaviour. This has been fixed in release 0.1a.  
