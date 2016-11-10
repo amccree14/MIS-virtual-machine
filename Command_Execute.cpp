@@ -57,16 +57,17 @@ void C_ADD::execute()
 	else if (oplist[0]->getType() == PARAM_TYPE::VAR_REA)
 	{
 		double temp = 0;
-			switch(oplist[0]->getType())
+		for (int i = 1; i < oplist.size(); ++i) {
+			switch(oplist[i]->getType())
 			{
 				case PARAM_TYPE::NUMERIC:
 				case PARAM_TYPE::VAR_NUM:
-					temp += *static_cast<long long*>(oplist[0]->getValue());
+					temp += *static_cast<long long*>(oplist[i]->getValue());
 					break;
 
 				case PARAM_TYPE::REAL:
 				case PARAM_TYPE::VAR_REA:
-					temp += *static_cast<double*>(oplist[0]->getValue());
+					temp += *static_cast<double*>(oplist[i]->getValue());
 					break;				
 				
 				//case PARAM_TYPE::CHAR:
@@ -83,7 +84,7 @@ void C_ADD::execute()
 										" (ADD parameter" 
 										+ std::to_string(1) + ")\n");
 			}
-		oplist[0]->setValue(static_cast<void*>(&temp));
+		oplist[0]->setValue(static_cast<void*>(&temp)); }
 			
 	}
 		// otherwise, if it's neither a REAL or NUMERIC variable, it's an error
@@ -285,14 +286,17 @@ void C_DIV::execute()
 						case PARAM_TYPE::NUMERIC:
 						case PARAM_TYPE::VAR_NUM:
 							{long long var2 = *static_cast<long long*>(oplist[2]->getValue());
-							temp = var1 / var2;
+							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
+							} else {temp = var1 / var2;}
 							break;}
 
 						case PARAM_TYPE::REAL:
 						case PARAM_TYPE::VAR_REA:
-							{double var2 = *static_cast<double*>(oplist[2]->getValue());
-							temp = var1 / var2;
+					 		{double var2 = *static_cast<double*>(oplist[2]->getValue());
+							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
+							} else {temp = var1 / var2;}
 							break;}
+
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (SUB parameter" 
@@ -307,13 +311,15 @@ void C_DIV::execute()
 						case PARAM_TYPE::NUMERIC:
 						case PARAM_TYPE::VAR_NUM:
 							{long long var2 = *static_cast<long long*>(oplist[2]->getValue());
-							temp = var1 / var2;
+							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
+							} else {temp = var1 / var2;}
 							break;}
 
 						case PARAM_TYPE::REAL:
 						case PARAM_TYPE::VAR_REA:
-							{double var2 = *static_cast<double*>(oplist[2]->getValue());
-							temp = var1 / var2;
+					 		{double var2 = *static_cast<double*>(oplist[2]->getValue());
+							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
+							} else {temp = var1 / var2;}
 							break;}
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
@@ -345,13 +351,15 @@ void C_DIV::execute()
 						case PARAM_TYPE::NUMERIC:
 						case PARAM_TYPE::VAR_NUM:
 							{long long var2 = *static_cast<long long*>(oplist[2]->getValue());
-							temp = var1 / var2;
+							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
+							} else {temp = var1 / var2;}
 							break;}
 
 						case PARAM_TYPE::REAL:
 						case PARAM_TYPE::VAR_REA:
-							{double var2 = *static_cast<double*>(oplist[2]->getValue());
-							temp = var1 / var2;
+					 		{double var2 = *static_cast<double*>(oplist[2]->getValue());
+							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
+							} else {temp = var1 / var2;}
 							break;}
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
@@ -366,13 +374,14 @@ void C_DIV::execute()
 						case PARAM_TYPE::NUMERIC:
 						case PARAM_TYPE::VAR_NUM:
 							{long long var2 = *static_cast<long long*>(oplist[2]->getValue());
-							temp = var1 / var2;
+							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
+							} else {temp = var1 / var2;}
 							break;}
-
 						case PARAM_TYPE::REAL:
 						case PARAM_TYPE::VAR_REA:
-							{double var2 = *static_cast<double*>(oplist[2]->getValue());
-							temp = var1 / var2;
+					 		{double var2 = *static_cast<double*>(oplist[2]->getValue());
+							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
+							} else {temp = var1 / var2;}
 							break;}
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
@@ -526,24 +535,28 @@ void C_OUT::execute() {
 				case PARAM_TYPE::VAR_NUM:
 				{long long val = *static_cast<long long*>(oplist[i]->getValue());
 					std::cout << val << std::endl;
+				 	mdata->o_out << val << std::endl;
 					break;}
 
 				case PARAM_TYPE::REAL:
 				case PARAM_TYPE::VAR_REA:
 				{double val = *static_cast<double*>(oplist[i]->getValue());
 					std::cout << val << std::endl;
+				 	mdata->o_out << val << std::endl;
 					break;}	
 				
 				case PARAM_TYPE::CHAR:
 				case PARAM_TYPE::VAR_CHA:
 				{char val = *static_cast<char*>(oplist[i]->getValue());
 					std::cout << val << std::endl;
+				 	mdata->o_out << val << std::endl;
 					break;}
 				
 				case PARAM_TYPE::STRING:
 				case PARAM_TYPE::VAR_STR:
 				{std::string val = *static_cast<std::string*>(oplist[i]->getValue());
 					std::cout << val << std::endl;
+				 	mdata->o_out << val << std::endl;
 					break;}
 		}
 	}
@@ -624,10 +637,10 @@ void C_JMP_GTELT::execute() {
 	long long var1 = *static_cast<long long*>(oplist[1]->getValue());
 	long long var2 = *static_cast<long long*>(oplist[2]->getValue());
 	
-	if( (var1 < var2) && (side) ) {
+	if( (var1 >= var2) && (side) ) {
 		mdata->setPC(label); }
 	
-	else if( !(var1 < var2) && !(side) ) {
+	else if( !(var1 >= var2) && !(side) ) {
 		mdata->setPC(label); }	
 	return;
 	
@@ -637,7 +650,7 @@ void C_JMP_GTELT::execute() {
 void C_SLEEP::execute() {
 	
 	long long var = *static_cast<long long*>(oplist[0]->getValue());
-    std::this_thread::sleep_for(std::chrono::seconds(var));
+    	std::this_thread::sleep_for(std::chrono::seconds(var));
 	return;
 	 
 }
