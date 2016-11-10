@@ -342,7 +342,7 @@ void C_DIV::execute()
 		// otherwise, if it's a REAL getType()... (see above for comments)
 	else if (oplist[0]->getType() == PARAM_TYPE::VAR_REA)
 	{
-		double temp;
+		
 		
 			switch(oplist[1]->getType())
 			{
@@ -357,14 +357,14 @@ void C_DIV::execute()
 						case PARAM_TYPE::VAR_NUM:
 							{long long var2 = *static_cast<long long*>(oplist[2]->getValue());
 							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
-							} else {temp = var1 / var2;}
+							} else {tempd = var1 / var2;}
 							break;}
 
 						case PARAM_TYPE::REAL:
 						case PARAM_TYPE::VAR_REA:
 					 		{double var2 = *static_cast<double*>(oplist[2]->getValue());
 							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
-							} else {temp = var1 / var2;}
+							} else {tempd = var1 / var2;}
 							break;}
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
@@ -372,7 +372,7 @@ void C_DIV::execute()
 												+ std::to_string(2) + ")\n");}}}
 				case PARAM_TYPE::REAL:
 				case PARAM_TYPE::VAR_REA:
-					{double var1 = *static_cast<double*>(oplist[1]->getValue());
+					{double var1d = *static_cast<double*>(oplist[1]->getValue());
 					
 									
 					switch(oplist[2]->getType()){
@@ -380,13 +380,13 @@ void C_DIV::execute()
 						case PARAM_TYPE::VAR_NUM:
 							{long long var2 = *static_cast<long long*>(oplist[2]->getValue());
 							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
-							} else {temp = var1 / var2;}
+							} else {tempd = var1d / var2;}
 							break;}
 						case PARAM_TYPE::REAL:
 						case PARAM_TYPE::VAR_REA:
 					 		{double var2 = *static_cast<double*>(oplist[2]->getValue());
 							 if(var2 == 0) { throw MIS_Excetion("ERROR: divide by zero! (DIV)\n") }
-							} else {temp = var1 / var2;}
+							} else {tempd = var1d / var2;}
 							break;}
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
