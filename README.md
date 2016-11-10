@@ -39,30 +39,30 @@ Create user-facing interface and MIS_System wrapper ***(complete 11/8)***
 
 # To-Do (Andrew)
 Command class executes
-  - ADD
-  - SUB
-  - MUL
-  - DIV
-  - ASSIGN
-  - OUT
-  - SET_STR_CHAR
-  - GET_STR_CHAR
-  - JMP
-  - JMPZNZ
-  - JMPGTLTE
-  - JMPGTELT
-  - SLEEP
+  - ~~ADD~~
+  - ~~SUB~~
+  - ~~MUL~~
+  - ~~DIV~~
+  - ~~ASSIGN~~
+  - ~~OUT~~
+  - ~~SET_STR_CHAR~~
+  - ~~GET_STR_CHAR~~
+  - ~~JMP~~
+  - ~~JMPZNZ~~
+  - ~~JMPGTLTE~~
+  - ~~JMPGTELT~~
+  - ~~SLEEP~~
   
   
 # To-Do (Marlo)
 UML Diagrams
-   - Class
-   - Sequence
-   - Use
+   - ~~Class~~
+   - ~~Sequence~~
+   - ~~Use~~
    
    
 # To-Do (Other)
-Debug, Makefile
+~~Debug~~, ~~Makefile~~
 
 # Known Issues
   - Labels currently cannot have names that start with numerals. Will be fixed later, if necessary.
