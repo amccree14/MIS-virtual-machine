@@ -598,7 +598,7 @@ Command* C_JMP::parse(std::stringstream& ss)
 	{
 			// if we've already generated every label, then....
 		if (mdata->l_parse)
-			throw MIS_Exception("Unable to find label \'"+ std::to_string(label)
+			throw MIS_Exception("Unable to find label \'"+ dbg::to_string(label)
 								+ "\' to JMP to!\n");
 			
 			// othwersie, store a pointer to this JMP factor, the string to be
@@ -667,7 +667,7 @@ Command* C_JMP_ZNZ::parse(std::stringstream& ss)
 	{
 			// if we've already generated every label, then....
 		if (mdata->l_parse)
-			throw MIS_Exception("Unable to find label \'"+ std::to_string(label)
+			throw MIS_Exception("Unable to find label \'"+ dbg::to_string(label)
 								+ "\' to JMP(Z/NZ) to!\n");
 			
 			// othwersie, store a pointer to this JMP factor, the string to be
@@ -750,7 +750,7 @@ Command* C_JMP_GTLTE::parse(std::stringstream& ss)
 	{
 			// if we've already generated every label, then....
 		if (mdata->l_parse)
-			throw MIS_Exception("Unable to find label \'"+ std::to_string(label)
+			throw MIS_Exception("Unable to find label \'"+ dbg::to_string(label)
 								+ "\' to JMP(GT/LTE) to!\n");
 			
 			// othwersie, store a pointer to this JMP factor, the string to be
@@ -849,7 +849,7 @@ Command* C_JMP_GTELT::parse(std::stringstream& ss)
 	{
 			// if we've already generated every label, then....
 		if (mdata->l_parse)
-			throw MIS_Exception("Unable to find label \'"+ std::to_string(label)
+			throw MIS_Exception("Unable to find label \'"+ dbg::to_string(label)
 								+ "\' to JMP(GTE/LT) to!\n");
 			
 			// othwersie, store a pointer to this JMP factor, the string to be

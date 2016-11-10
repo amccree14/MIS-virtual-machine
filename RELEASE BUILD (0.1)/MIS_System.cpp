@@ -29,7 +29,7 @@
 #include "helpers.h"
 
 
-#include "z_dbg.h"		// debug (for std::to_string emulation)
+#include "z_dbg.h"		// debug (for dbg::to_string emulation)
 
 
 
@@ -214,13 +214,13 @@ bool MIS_System::parse(char* filename)
 					}
 					catch (MIS_Exception ex)
 					{
-						mdata.o_err << "ERROR: " << std::to_string(ex.what())
+						mdata.o_err << "ERROR: " << dbg::to_string(ex.what())
 									<< "\t\t - Line #" 
-									<< std::to_string(linenumber) << ".\n";
+									<< dbg::to_string(linenumber) << ".\n";
 						success = false;
-						//throw MIS_Exception("ERROR: "+ std::to_string(ex.what())
+						//throw MIS_Exception("ERROR: "+ dbg::to_string(ex.what())
 						//					+ "\t\t - Line #" 
-						//					+ std::to_string(linenumber) 
+						//					+ dbg::to_string(linenumber) 
 						//					+ ".\n");
 					}
 				}
@@ -229,13 +229,13 @@ bool MIS_System::parse(char* filename)
 		catch(std::out_of_range& ex)
 		{
 				// and output an error with the line number
-			mdata.o_err << "ERROR: '" << std::to_string(temp)
+			mdata.o_err << "ERROR: '" << dbg::to_string(temp)
 						<< "' unrecognized opcode at line "
-						<< std::to_string(linenumber) << ".\n";
+						<< dbg::to_string(linenumber) << ".\n";
 			success = false;
-			//throw MIS_Exception("ERROR. '" + std::to_string(temp)
+			//throw MIS_Exception("ERROR. '" + dbg::to_string(temp)
 			//					+ "' unrecognized opcode at line " 
-			//					+ std::to_string(linenumber) + ".\n");
+			//					+ dbg::to_string(linenumber) + ".\n");
 			//std::cout << "\n\t --ERROR. '" << temp << "' unrecognized opcode"
 			//			<< "at line " << linenumber << "." << std::endl;
 		}
@@ -243,10 +243,10 @@ bool MIS_System::parse(char* filename)
 		
 		if (sbuf.size() > 1024)
 		{
-			mdata.o_err << "ERROR: line #" << std::to_string(linenumber) 
+			mdata.o_err << "ERROR: line #" << dbg::to_string(linenumber) 
 						<< " is over 1024 characters long!\n";
 			success = false;
-			//throw MIS_Exception("ERROR, line #" + std::to_string(linenumber) 
+			//throw MIS_Exception("ERROR, line #" + dbg::to_string(linenumber) 
 			//					+ " is over 1024 characters long!\n");
 			//return false;
 		}
@@ -292,7 +292,7 @@ bool MIS_System::parse(char* filename)
 		}
 		catch (MIS_Exception &ex)
 		{
-			mdata.o_err << "ERROR: " << std::to_string(ex.what());
+			mdata.o_err << "ERROR: " << dbg::to_string(ex.what());
 			success = false;
 		}
 		

@@ -8,7 +8,7 @@
 
 	// fake std::to_string function because cygwin and other windows
 	//	gcc builds do NOT support it.
-namespace std
+namespace dbg
 {
 	template <typename A>
 	string to_string(A x)

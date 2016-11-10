@@ -55,7 +55,7 @@ void C_ADD::execute()
 					// if there are no matches, throw an exception
 				default: throw MIS_Exception("ERROR: Invalid parameter getType()!"
 										" (ADD parameter" 
-										+ std::to_string(i+1) + ")\n");
+										+ dbg::to_string(i+1) + ")\n");
 			}
 		}
 			// store the final value into the given variable
@@ -90,7 +90,7 @@ void C_ADD::execute()
 				
 				default: throw MIS_Exception("ERROR: Invalid parameter getType()!"
 										" (ADD parameter" 
-										+ std::to_string(1) + ")\n");
+										+ dbg::to_string(1) + ")\n");
 			}
 		oplist[0]->setValue(static_cast<void*>(&temp)); }
 			
@@ -157,7 +157,7 @@ void C_SUB::execute()
 
 						default: throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (SUB parameter" 
-												+ std::to_string(2) + ")\n");
+												+ dbg::to_string(2) + ")\n");
 					}
 					break;
 					     
@@ -182,12 +182,12 @@ void C_SUB::execute()
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (SUB parameter" 
-												+ std::to_string(2) + ")\n");}}
+												+ dbg::to_string(2) + ")\n");}}
 					break;}
 								
 				default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 										" (SUB parameter" 
-										+ std::to_string(1) + ")\n");}
+										+ dbg::to_string(1) + ")\n");}
 			
 				
 		}
@@ -221,7 +221,7 @@ void C_SUB::execute()
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (SUB parameter" 
-												+ std::to_string(2) + ")\n");}}
+												+ dbg::to_string(2) + ")\n");}}
 					break;
 				}
 					
@@ -246,12 +246,12 @@ void C_SUB::execute()
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (SUB parameter" 
-												+ std::to_string(2) + ")\n");}}
+												+ dbg::to_string(2) + ")\n");}}
 					break;
 								
 				default: throw MIS_Exception("ERROR: Invalid parameter getType()!"
 										" (SUB parameter" 
-										+ std::to_string(1) + ")\n");}		
+										+ dbg::to_string(1) + ")\n");}		
 		}
 		
 			// store the final value into the given variable
@@ -302,7 +302,7 @@ void C_DIV::execute()
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (SUB parameter" 
-												+ std::to_string(2) + ")\n");}} 
+												+ dbg::to_string(2) + ")\n");}} 
 					
 					break;							
 					}
@@ -330,12 +330,12 @@ void C_DIV::execute()
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (DIV parameter" 
-												+ std::to_string(2) + ")\n");}}
+												+ dbg::to_string(2) + ")\n");}}
 					break;}
 								
 				default: throw MIS_Exception("ERROR: Invalid parameter getType()!"
 										" (DIV parameter" 
-										+ std::to_string(1) + ")\n");
+										+ dbg::to_string(1) + ")\n");
 					}
 			// store the final value into the given variable
 		oplist[0]->setValue(static_cast<void*>(&temp));		
@@ -370,7 +370,7 @@ void C_DIV::execute()
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (SUB parameter" 
-												+ std::to_string(2) + ")\n");}}
+												+ dbg::to_string(2) + ")\n");}}
 												
 				break;								
 				}
@@ -395,12 +395,12 @@ void C_DIV::execute()
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
 												" (SUB parameter" 
-												+ std::to_string(2) + ")\n");}}
+												+ dbg::to_string(2) + ")\n");}}
 					break;}
 								
 				default: throw MIS_Exception("ERROR: Invalid parameter getType()!"
 										" (SUB parameter" 
-										+ std::to_string(1) + ")\n");
+										+ dbg::to_string(1) + ")\n");
 		
 		}
 		
@@ -455,7 +455,7 @@ void C_MUL::execute() {
 					// if there are no matches, throw an exception
 				default: throw MIS_Exception("ERROR: Invalid parameter getType()!"
 										" (ADD parameter" 
-										+ std::to_string(i+1) + ")\n");
+										+ dbg::to_string(i+1) + ")\n");
 			}
 		}
 			// store the final value into the given variable
@@ -490,7 +490,7 @@ void C_MUL::execute() {
 				
 				default: throw MIS_Exception("ERROR: Invalid parameter getType()!"
 										" (ADD parameter" 
-										+ std::to_string(i+1) + ")\n");
+										+ dbg::to_string(i+1) + ")\n");
 			}
 		}
 		oplist[0]->setValue(static_cast<void*>(&temp));

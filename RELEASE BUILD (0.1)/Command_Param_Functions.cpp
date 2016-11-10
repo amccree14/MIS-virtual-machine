@@ -251,13 +251,13 @@ OP_Param_Base* Command::makeParam(std::stringstream& ss)
 			
 			noWhiteEndString(st);
 			
-			// std::cout << "size: " << std::to_string(st.size());
+			// std::cout << "size: " << dbg::to_string(st.size());
 			for (int i = 0; i < st.size()-1; ++i)
 			{
-				// std::cout << " | post-size: " << std::to_string(st.size());
+				// std::cout << " | post-size: " << dbg::to_string(st.size());
 				if (!(isdigit(st[i])) && st[i] != '.')
 					throw MIS_Exception("Error during parse of a number! "
-										"Non-digit detected!" + std::to_string(i) + "\n");
+										"Non-digit detected!" + dbg::to_string(i) + "\n");
 			}
 			
 			
