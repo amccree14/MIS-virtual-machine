@@ -118,7 +118,9 @@ void C_SUB::execute()
 	if (oplist[0]->getType() == PARAM_TYPE::VAR_NUM) {
 		
 	 	long long temp;
+		double tempd;
 		long long var1;
+		double var1d;
 			switch(oplist[1]->getType())
 			{
 				case PARAM_TYPE::NUMERIC:
@@ -202,7 +204,6 @@ void C_SUB::execute()
 		// otherwise, if it's a REAL getType()... (see above for comments)
 	else if (oplist[0]->getType() == PARAM_TYPE::VAR_REA)
 	{
-		double temp;
 		
 			switch(oplist[1]->getType())
 			{
@@ -216,13 +217,13 @@ void C_SUB::execute()
 						case PARAM_TYPE::NUMERIC:
 						case PARAM_TYPE::VAR_NUM:
 							{long long var2 = *static_cast<long long*>(oplist[2]->getValue());
-							temp = var1 - var2;
+							tempd = var1 - var2;
 							break;}
 
 						case PARAM_TYPE::REAL:
 						case PARAM_TYPE::VAR_REA:
 							{double var2 = *static_cast<double*>(oplist[2]->getValue());
-							temp = var1 - var2;
+							tempd = var1 - var2;
 							break;}
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
@@ -232,20 +233,20 @@ void C_SUB::execute()
 					     
 				case PARAM_TYPE::REAL:
 				case PARAM_TYPE::VAR_REA:
-					{double var1 = *static_cast<double*>(oplist[1]->getValue());
+					{ var1d = *static_cast<double*>(oplist[1]->getValue());
 					
 									
 					switch(oplist[2]->getType()){
 						case PARAM_TYPE::NUMERIC:
 						case PARAM_TYPE::VAR_NUM:
 							{long long var2 = *static_cast<long long*>(oplist[2]->getValue());
-							temp = var1 - var2;
+							tempd = var1d - var2;
 							break;}
 
 						case PARAM_TYPE::REAL:
 						case PARAM_TYPE::VAR_REA:
 							{double var2 = *static_cast<double*>(oplist[2]->getValue());
-							temp = var1 - var2;
+							tempd = var1d - var2;
 							break;}
 
 						default: {throw MIS_Exception("ERROR: Invalid parameter getType()!"
@@ -273,6 +274,10 @@ void C_DIV::execute()
 	if (oplist[0]->getType() == PARAM_TYPE::VAR_NUM) {
 		
 	 	long long temp;
+		double tempd;
+		long long var1;
+		double var1d;
+		
 		
 			switch(oplist[1]->getType())
 			{
