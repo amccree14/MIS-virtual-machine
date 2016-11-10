@@ -1,0 +1,251 @@
+CMPS109 Project
+---------------
+
+Authors: Arthur Kung, Andrew McCree, Marlo Eslao
+
+---------------
+
+---------
+Building:
+---------
+
+	This software can be built using g++ by simply calling 'make'
+on the command line. If it is necessary to build the software by hand,
+then it is necessary to type the following:
+
+	'g++ [every] [single] [.cpp] [file] -std=c++11'
+
+Where every single [] is replaced by .cpp files until you have listed
+every single .cpp file in this project.
+
+
+-------
+Design:
+-------
+
+	The design was decided upon immediately, when I (Arthur) drew 
+something up and presented it at our first meeting. The core concept 
+behind the design direction was to create a 'commands' vector that 
+would store functioning, translated commands and allow for easy 
+execution and jumping between parts of the code (for the JMP opcodes).
+
+The actual implementation was originally drawn out in a general fashion,
+with the hopes of using significant amounts of templating in combination
+with virtual functions to allow the entire system to function with a
+minimum of man-made classes and void pointers.
+
+Unfortunately, that quickly proved to be faulty logic, when it became
+apparent that virtual functions and class templates did not mix.
+
+The end result was an expansion into the use of class pointers where
+they were originally avoided.
+
+Fortunately, in designing, I had decided to include TYPE enumerations
+for every parameter object, in the case that we'd need to identify them,
+and it turned out to be quite useful in deciding how to handle the void
+pointer returns from each of their getValue() functions.
+
+Further design choices basically didn't occur, and the original design
+direction has been carried through to completion.
+
+-------------
+How it Works:
+-------------
+
+	There is an overall MIS_System class that contains two
+functions: parse() and run().
+
+When parse() is called, it takes a char* argument and attempts
+to find a valid .mis file using it. If it succeeds, then it
+creates an object factory, with one object for each of the
+opcodes (ie: ADD, SUB, VAR, JMP, LABEL).
+
+All of the opcode objects are derived from a base 'Command'
+class, and each one has a unique (virtual) parse() function
+that parses through a given string to generate a parameter list.
+
+Each parameter that is created is stored in a template class
+that is derived from a base 'OP_Param_Base' class. There
+are three types of derived parameter classes:
+	- Params: constant, immediate values, cannot be changed
+	- Variables: variables declared by the user
+	- V_Param: the behind-the-scenes storage of variable data
+
+Of those three classes, both Params and V_Param are templated, but
+Variables is specifically not. This is because Variables is actually
+just a sort of wrapper for the V_Param objects.
+
+Internally, when a user creates a variable, the system adds a
+templated V_Param object (which has a type that matches the
+user's request) into an internally tracked vector.
+
+The Variable class is created with an int value that points
+at the index within the V_Param vector where its matching
+V_Param object is stored.
+
+Labels are stored similarly.
+
+
+Key points of interest are how our system handles JMP calls
+to labels that are not yet declared.
+
+If the system cannot find a label to match the JMP call, it will
+push that particular JMP call to a stack, fill its position in
+the command vector with a placeholder, and leave it for later.
+When the system finishes parsing everything, it will return to
+the stack of incomplete JMP parses and run through them again.
+
+If, at this point, the system STILL cannot find the label that
+matches the JMP call's request, it will output an error.
+
+-------
+ERRORS
+-------
+
+The system throws exceptions and outputs them to a file
+and to the screen when it catches them.
+
+If an error is found during parsing, the system will
+complete its parse attempt, output all the errors as they
+occur, and then cease operation.
+
+If no errors are found during parsing, the system will
+continue on to the execution phase.
+
+If errors occur during execution, the system will throw
+an exception where the error occurs, then catch the exception,
+output an error message, and quit.
+
+
+---------------
+MEMORY HANDLING
+---------------
+
+There are a number of dynamically allocated objects throughout
+this system, most notably in our parameter lists and command
+vector.
+
+ALL dynamically allocated objects are almost immediately
+matched with a shared_ptr, and are then stored into STL containers.
+
+Because STL containers clean up when they leave scope, and
+because the shared_ptr will delete the object it's pointed to,
+we do NOT explicitly call delete anywhere in our code, and instead
+leave all the garbage collection to shared_ptr to handle.
+
+
+
+
+
+
+-------------
+TESTING:
+-------------
+
+For the time being, we've included a single test file
+(test.mis).
+
+This program will ONLY accept *.mis extension files,
+and will output both errors and user-output to the
+screen.
+
+In additiona, errors will be saved in the generated
+*.err file, and user-output will be saved in the
+generated *.out file.
+
+KEEP IN MIND that if those files exist already,
+the program will simply OVERWRITE their contents,
+rather than increment them (ie: file_1, file_2).
+
+These choices were made for simplicity (overwriting
+files) and ease of debugging (outputting everything
+to the screen).
+
+
+
+
+------------------------------
+SPECIAL NOTE:
+------------------------------
+
+There is a std::to_string function
+defined in the z_dbg.cpp file.
+
+This file and its corresponding header
+exists purely for debugging purposes,
+and are notably most useful on Windows
+systems, where gcc ports (ie: Cygwin)
+do not have support for parts of C++11,
+including, but not limited to, missing
+support for std::to_string.
+
+These are left in for ease of continued
+debugging. If needed, they can be separated
+from the project entirely by deleting any
+includes that call for "z_dbg.h".
+
+
+
+
+
+------------------------------
+CONTRIBUTIONS PER PERSON:
+------------------------------
+
+Arthur Kung:
+	- solo coded + commented every single file
+		- except Command_Execute.cpp (delegated to Andrew)
+		- (sorry for some less commented areas, too tired)
+	- created/coded every header file
+	- primary designer
+		- all design choices (good or bad)
+
+Andrew McCree:
+	- team leader organized most of the meetings
+	- coding Command_Execute.cpp
+	- focused heavily on implementation
+	- design input
+
+Marlo Eslao:
+	- UML class diagram
+	- UML sequence diagram
+	- UML use diagram
+	- design input
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-----------------------------
+PROBLEM (our ghost member):
+-----------------------------
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Dylan Ma:
+	- Dylan Ma did not do anything. Team repeatedly reached out and 
+	  tried to communicate, but when communication finally happened, dylan 
+	  made empty promises and did not fulfill tasks that were delegated
+	  to him at his request. (Andrew)
+
+	- After not hearing from him for the first two weeks of the project,
+	  Dylan finally responded to us and showed up the day after the project
+	  was due. While we were concerned that he hadn't participated at all
+	  up to that point, we welcomed him and let him see our design and code.
+	  He requested to be allowed to edit some files and work on certain
+	  things, which we agreed with. Notably, his first request was to change
+	  an 'enum' to a 'const' in a file with less than 20 lines in it.
+
+	  Five days later, he still hadn't touched the file, nor had he made
+	  a single commit to the Github.
+
+	  We made the executive decision to stop trying to include him in the
+	  project at that point (Monday before the extended due date), so that
+	  we could focus on finishing it ourselves. Waiting for him to contribute
+	  was pointless and held up our progress. (Arthur)
+	  
+	- Dylan Ma said he was going to meetup with the team to start implementing 
+          the command functions but never showed up. He actually instead said he went
+          to work on the assignment with his friend who isnt even in 109 but has 
+          "previous experience" and could help out. It was disrespectful because he
+           left the team waiting at the library for 3+ hours on multiple days.
+
+	  He gave off the feeling that he wanted to do work, but he never followed
+	  through. Where he at. (Marlo)
