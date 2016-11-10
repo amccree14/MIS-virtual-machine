@@ -520,9 +520,33 @@ void C_OUT::execute() {
 		// start at begininng of oplist to print out every value 
 		for (int i = 0; i < oplist.size() - 1; ++i)
 	{
-		std::cout << oplist[i]->getValue() << std::endl;
-	}
-	
+		switch(oplist[i]->getType())
+			{
+				case PARAM_TYPE::NUMERIC:
+				case PARAM_TYPE::VAR_NUM:
+					long long val = *static_cast<long long*>(oplist[i]->getValue());
+					std::cout << val << std::endl;
+					break;
+
+				case PARAM_TYPE::REAL:
+				case PARAM_TYPE::VAR_REA:
+					double val = *static_cast<double*>(oplist[i]->getValue());
+					std::cout << val << std::endl;
+					break;	
+				
+				case PARAM_TYPE::CHAR:
+				case PARAM_TYPE::VAR_CHA:
+					char val = *static_cast<char*>(oplist[i]->getValue());
+					std::cout << val << std::endl;
+					break;
+				
+				case PARAM_TYPE::STRING:
+				case PARAM_TYPE::VAR_STR:
+					std:string val = *static_cast<std:string*>(oplist[i]->getValue());
+					std::cout << val << std::endl;
+					break;
+		}
+	}	
 	return;
 }
 
