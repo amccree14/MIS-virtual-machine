@@ -8,9 +8,10 @@
 *
 * Details:
 *	- The methods declared in this header file are
-*		implemented in Params.cpp.
+*		implemented in V_Param.cpp.
 *
-*	- This file contains the declaration for the V_Param class template.
+*	- This file contains the declaration and implementation
+*		for the V_Param class template.
 *
 *	- This class is ONLY used to store the data elements of variables
 *		in a vector to be accessed by the Variable class's getValue and
@@ -35,6 +36,20 @@ class V_Param: public OP_Param_Base
 		void setValue(void*);		// this will set a value
 };
 
+
+
+template <class A>
+void* V_Param<A>::getValue()			// return value
+{
+	return static_cast<void*>(&value);
+}
+		
+
+template <class A>
+void V_Param<A>::setValue(void* pt)		// stores dereferenced value
+{
+	value = *static_cast<A*>(pt);
+}
 
 
 #endif

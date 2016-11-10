@@ -21,13 +21,7 @@
 *		parsed code, variables, or labels.
 ******************/
 
-
-#include <string>		// strings
-#include <fstream>		// file i/o
-#include <vector>		// std vectors
-
 #include "Command.h"
-#include "Label.h"
 #include "Variable.h"
 #include "MIS_System_Data.h"
 
@@ -53,8 +47,8 @@ class MIS_System
 			//			we MUST catch the exception and exit elegantly.
 			//			The STD containers WILL throw std::bad_alloc exceptions
 			//			if there is not enough memory to expand or create items!
-		void parse(string filename);	// parse file into vectors
-		void run();						// execute through the command vector
+		void parse(char* filename);	// parse file into vectors
+		void run();							// execute through the command vector
 			
 	
 };
