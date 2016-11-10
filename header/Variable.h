@@ -16,7 +16,8 @@
 ******************/
 
 #include "OP_Param_Base.h"
-#include "MIS_System_Data.h"
+
+class MIS_System_Data;
 
 	// note: non-virtual inheritance, because it's unnecessary
 class Variable: public OP_Param_Base
@@ -25,7 +26,7 @@ class Variable: public OP_Param_Base
 		int value;		// value stored within the param or variable
 						//	- For param, it's an actual value
 						//	- For variable, it's the variable index
-		MIS_System_Data* mdata;
+		MIS_System_Data *mdata;
 	
 	public:
 		Variable(int x, OP_TYPE t, MIS_System_Data* data)

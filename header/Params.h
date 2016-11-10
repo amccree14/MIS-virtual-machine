@@ -10,7 +10,7 @@
 *	- The methods declared in this header file are
 *		implemented in Params.cpp.
 *
-*	- This file contains the declaration for the Params class template.
+*	- This file contains declaration & definition for the Params class template.
 *		The only things that are defined within this class are the setValue
 *		and getValue functions.
 *
@@ -39,6 +39,21 @@ class Params: public OP_Param_Base
 		void* getValue();			// return value
 		void setValue(void*);		// this should always throw an exception
 };
+
+
+
+template <class A>
+void* Params<A>::getValue()			// return value
+{
+	return static_cast<void*>(&value);
+}
+		
+
+template <class A>
+void Params<A>::setValue(void* pt)	// this should always throw an exception
+{
+	throw MIS_Exception("Cannot assign value to right-hand value parameter.\n");
+}
 
 
 
