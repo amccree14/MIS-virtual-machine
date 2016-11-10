@@ -1,8 +1,12 @@
 # MIS-virtual-machine
 CS109 project
 
+# Current Version: 0.1a
+**Changes:**
+  - moved overloaded to_string function template out of the std namespace and into the dbg namespace to avoid undefined behaviour.
 
-# To-Do (Arthur)
+
+## To-Do (Arthur)
 Command class internal parsers ***(complete 11/8)***
   - ~~ADD~~
   - ~~SUB~~
@@ -37,7 +41,11 @@ OP_Param_Base class setter/getters/constructors ***(complete 11/8)***
 Create user-facing interface and MIS_System wrapper ***(complete 11/8)***
   - ~~MIS.cpp~~
 
-# To-Do (Andrew)
+Create additional systems to flesh out system ***(complete 11/9)***
+  - ~~file-output system~~
+  - ~~post-parse Label linking system~~
+
+## To-Do (Andrew)
 Command class executes
   - ~~ADD~~
   - ~~SUB~~
@@ -54,23 +62,22 @@ Command class executes
   - ~~SLEEP~~
   
   
-# To-Do (Marlo)
+## To-Do (Marlo)
 UML Diagrams
    - ~~Class~~
    - ~~Sequence~~
    - ~~Use~~
    
    
-# To-Do (Other)
+## To-Do (Other)
 ~~Debug~~, ~~Makefile~~
 
-# Known Issues
-  - Labels currently cannot have names that start with numerals. Will be fixed later, if necessary.
-  
+## Known Issues
+  - Submitted revision *may* not compile on some systems. Has an overloaded function in the std namespace, which causes undefined behaviour. This has been fixed in release 0.1a.  
   - Commenting is sparse in some files, due to time constraints.
 
 
-# Additional Notes
+## Additional Notes
 
 (Arthur, 11/8/16) Yay. Time to create a user-facing interface and start the long debug haul. (update: created user-interface, waiting on completion of rest of code to do full debugging. Partial debug underway)
 
