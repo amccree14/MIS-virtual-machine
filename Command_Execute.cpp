@@ -524,27 +524,27 @@ void C_OUT::execute() {
 			{
 				case PARAM_TYPE::NUMERIC:
 				case PARAM_TYPE::VAR_NUM:
-					long long val = *static_cast<long long*>(oplist[i]->getValue());
+				{long long val = *static_cast<long long*>(oplist[i]->getValue());
 					std::cout << val << std::endl;
-					break;
+					break;}
 
 				case PARAM_TYPE::REAL:
 				case PARAM_TYPE::VAR_REA:
-					double val = *static_cast<double*>(oplist[i]->getValue());
+				{double val = *static_cast<double*>(oplist[i]->getValue());
 					std::cout << val << std::endl;
-					break;	
+					break;}	
 				
 				case PARAM_TYPE::CHAR:
 				case PARAM_TYPE::VAR_CHA:
-					char val = *static_cast<char*>(oplist[i]->getValue());
+				{char val = *static_cast<char*>(oplist[i]->getValue());
 					std::cout << val << std::endl;
-					break;
+					break;}
 				
 				case PARAM_TYPE::STRING:
 				case PARAM_TYPE::VAR_STR:
-					std:string val = *static_cast<std:string*>(oplist[i]->getValue());
+				{std::string val = *static_cast<std::string*>(oplist[i]->getValue());
 					std::cout << val << std::endl;
-					break;
+					break;}
 		}
 	}	
 	return;
