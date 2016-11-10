@@ -1,0 +1,20 @@
+Here's a basic way of building a JMPGT execute().
+
+JMPGT has the following values: bool switch, A param1, A param2
+
+
+JMPGT::execute()
+{
+		// if switch is flagged, check greater than, otherwise check less-or-equal
+	if (switch)
+		switch = param1 > param2;
+	else
+		switch = param1 <= param2;
+
+		// if it was true, set new pc value for command vector
+	if (switch)
+		pc = newpc;
+
+		// done
+	return;
+}
