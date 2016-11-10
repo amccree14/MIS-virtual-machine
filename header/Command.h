@@ -28,11 +28,9 @@
 #include <sstream>
 #include <memory>	// shared_ptr
 
+#include "MIS_System_Data.h"	// all the necessary data members
 #include "MAXMIN_ENUM.h"		// enum lists for the parameter adding
-#include "OP_Param_Base.h"
 
-
-class MIS_System_Data;
 
 class Command
 {
@@ -46,7 +44,7 @@ class Command
 	
 	
 	public:
-		Command(MIS_System_Data* data):mdata(data){}		// basic constructor
+		Command(OP_System_Data* data):mdata(data){}		// basic constructor
 														// sets mdata pointer
 		
 			// !! - These functions all throw exceptions if failures occur,
@@ -63,19 +61,17 @@ class Command
 											//  Takes a pointer and converts it
 											//	to a shared_ptr to be placed
 											//	in the oplist vector.
-		OP_Param_Base* makeParam(std::stringstream&);
+		static OP_Param_Base* makeParam(std::stringstream);
 											// static function in the class
 											//	that parses a string and
 											//	creates a parameter from it
 	
-		int size(){return oplist.size();}				// static function for # of parameters
+		static int size(){return oplist.size();}				// static function for # of parameters
 		
 		
-		virtual void execute()=0;			// calls op and passes it parameters
+		virtual void execute();			// calls op and passes it parameters
 		
-		virtual Command* parse(std::stringstream&)=0;
-		
-		//~Command(){}
+		virtual Command* parse(std::stringstream);
 		
 		
 		// ~Command destructor will only be needed if vectors do not clean
@@ -109,70 +105,70 @@ class C_ADD: public Command
 {
 	public:
 		C_ADD(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_SUB: public Command
 {
 	public:
 		C_SUB(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_MUL: public Command
 {
 	public:
 		C_MUL(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_DIV: public Command
 {
 	public:
 		C_DIV(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_ASSIGN: public Command
 {
 	public:
 		C_ASSIGN(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_OUT: public Command
 {
 	public:
 		C_OUT(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_SET_STR_CHAR: public Command
 {
 	public:
 		C_SET_STR_CHAR(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_GET_STR_CHAR: public Command
 {
 	public:
 		C_GET_STR_CHAR(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_LABEL: public Command
 {
 	public:
 		C_LABEL(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_SLEEP: public Command{
 	public:
 		C_SLEEP(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 
 
@@ -189,36 +185,36 @@ class C_SLEEP: public Command{
 	//	> is the same as the opposite of <=, etc., and Z is the opposite of NZ.
 class C_JMP: public Command
 {
-	protected:
+	private:
 		bool side;		// used for zero/non-zero or gt/lt or gte/lte
 	public:
 		C_JMP(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_JMP_ZNZ: public C_JMP
 {
 	public:
 			// basic constructor to set the boolean
-		C_JMP_ZNZ(MIS_System_Data* data, bool b):C_JMP(data){side=b;}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		C_JMP_ZNZ(MIS_System_Data* data, bool b):C_JMP(data), side(b){}
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_JMP_GTLTE: public C_JMP
 {
 	public:
 			// basic constructor to set the boolean
-		C_JMP_GTLTE(MIS_System_Data* data, bool b):C_JMP(data){side=b;}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		C_JMP_GTLTE(MIS_System_Data* data, bool b):C_JMP(data), side(b){}
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 class C_JMP_GTELT: public C_JMP
 {
 	public:
 			// basic constructor to set the boolean
-		C_JMP_GTELT(MIS_System_Data* data, bool b):C_JMP(data){side=b;}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		C_JMP_GTELT(MIS_System_Data* data, bool b):C_JMP(data), side(b){}
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 
 
@@ -229,8 +225,8 @@ class C_VAR: public Command
 {
 	public:
 		C_VAR(MIS_System_Data* data):Command(data){}
-		void execute();
-		Command* parse(std::stringstream& ss);	
+		execute();
+		Command* parse(std:stringstream ss);	
 };
 
 

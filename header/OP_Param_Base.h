@@ -39,9 +39,9 @@ class OP_Param_Base
 		
 		
 			// get value from variable/parameter
-		virtual void* getValue()=0;
+		virtual void* getValue();
 			// set value for a variable, throw error for normal param
-		virtual void setValue(void*)=0;
+		virtual void setValue(void*);
 	
 			// these size functions are for the STRING variables
 		void setSize(long long val){max_size = val;}
@@ -50,7 +50,6 @@ class OP_Param_Base
 			// return type of this parameter
 		OP_TYPE getType(){return type;}
 
-		//~OP_Param_Base(){}
 		
 		
 	protected:	

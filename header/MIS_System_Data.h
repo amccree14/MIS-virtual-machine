@@ -14,13 +14,10 @@
 
 #include <string>		// strings
 #include <fstream>		// file i/o
-#include <memory>		// shared_ptr
 #include <vector>		// std vectors
+#include <memory>		// shared_ptr
 #include <map>			// std maps
-#include <stack>		// std stacks
-#include <stdexcept>	// out_of_range exception
 
-#include "labelLink.h"
 #include "Command.h"
 #include "Variable.h"
 #include "V_Param.h"
@@ -41,18 +38,12 @@ class MIS_System_Data
 	public:
 		std::vector<std::shared_ptr<Command>> commands;	// command vector
 	
-		std::map<std::string,int> labels;		// map of label indices by name
+		std::map<string,int> labels;		// map of label indices by name
 	
 			// varNames is only used during 'compile' time, since afterwards
 			//		the variable parameters will be stored directly by index
-		std::map<std::string, int> varNames;	// map of var indices by name
-		std::vector<std::shared_ptr<OP_Param_Base>> variables;// var data vector
-		
-		
-			// to store all the labels that haven't been linked yet
-		std::stack<std::shared_ptr<labelLink>> labelLinkStack;
-			// to signify whether we've parsed all labels already or not
-		bool l_parse = false;
+		std::map<string, int> varNames;	// map of var indices by name
+		std::vector<std::shared_ptr<V_Param>> variables;	// var data vector
 		
 		
 			// these functions MAY be needed for future locking capabilities
