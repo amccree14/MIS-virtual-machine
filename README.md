@@ -73,7 +73,7 @@ UML Diagrams
 ~~Debug~~, ~~Makefile~~
 
 ## Known Issues
-  - Submitted revision *may* not compile on some systems. Has an overloaded function in the std namespace, which causes undefined behaviour. This has been fixed in release 0.1a.  
+  - Submitted revision *may* not compile on some systems. Release 0.1 has an overloaded function in the std namespace, which causes undefined behaviour. This has been fixed in release 0.1a.  
   - Commenting is sparse in some files, due to time constraints.
 
 
