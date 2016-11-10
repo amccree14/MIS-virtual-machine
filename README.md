@@ -1,7 +1,7 @@
 # MIS-virtual-machine
 CS109 project
 
-# Current Version: 0.1a
+# Current Version: 0.1a (Nov 10 2016)
 **Changes:**
   - moved overloaded to_string function template out of the std namespace and into the dbg namespace to avoid undefined behaviour.
 
@@ -46,7 +46,7 @@ Create additional systems to flesh out system ***(complete 11/9)***
   - ~~post-parse Label linking system~~
 
 ## To-Do (Andrew)
-Command class executes
+Command class executes ***(complete 11/9)***
   - ~~ADD~~
   - ~~SUB~~
   - ~~MUL~~
@@ -62,14 +62,14 @@ Command class executes
   - ~~SLEEP~~
   
   
-## To-Do (Marlo)
+## To-Do (Marlo) ***(complete 11/9)***
 UML Diagrams
    - ~~Class~~
    - ~~Sequence~~
    - ~~Use~~
    
    
-## To-Do (Other)
+## To-Do (Other) ***(complete 11/9)***
 ~~Debug~~, ~~Makefile~~
 
 ## Known Issues
