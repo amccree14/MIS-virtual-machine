@@ -518,7 +518,7 @@ void C_ASSIGN::execute()
 
 void C_OUT::execute() {
 		// start at begininng of oplist to print out every value 
-		for (int i = 0; i < oplist.size() - 1; ++i)
+		for (int i = 0; i < oplist.size(); ++i)
 	{
 		switch(oplist[i]->getType())
 			{
@@ -546,7 +546,7 @@ void C_OUT::execute() {
 					std::cout << val << std::endl;
 					break;}
 		}
-	}	
+	}
 	return;
 }
 
