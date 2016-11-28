@@ -1,4 +1,5 @@
 #include "Thread.h"
+#include <iostream>
 
 // Modifier: Set thread running flag
 void Thread::setRunning (bool _running)
@@ -20,7 +21,7 @@ void Thread::cleanup(void * target_thread)
 Thread::Thread(void *(*_threadRoutine) (void *))
 {
     size_t stacksize = 1024*1024*4;  // Set stack to 4 MB   
-    running = false;    // Set running to false
+    running = false;    // Set running to TRUE//false
     started = false;    // Set started to false
     termination_request = false;    // Set termination request to false
     pthread_mutex_init (&mutex,NULL);// Initialize execution control mutex
@@ -86,7 +87,9 @@ void * Thread::run(void * arg)
 // Block until thread finishes execution
 void Thread::waitForRunToFinish ()
 {
+// 	std::cout << "\n\n\t - WAITING FOR RUN TO FINISH, LOCKING - \n";
 	pthread_mutex_lock(&mutex); // Lock mutex which will block in case the thread is running
+// 	std::cout << "\n\n\t - DONE WAITING FOR RUN TO FINISH, UNLOCKING - \n";
 	pthread_mutex_unlock(&mutex);   // Unlock mutex as soon as it is acquired,which guarantees that the thread terminated
 }
 // Get Thread readable Identifier

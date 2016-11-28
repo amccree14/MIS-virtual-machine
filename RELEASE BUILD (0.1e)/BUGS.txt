@@ -1,4 +1,4 @@
-All bugs squashed as of Nov 27, 2016 (9PM)
+All bugs squashed as of Nov 28, 2016 (4AM)
 ---------------------------
 
 ---------------------------
@@ -10,3 +10,24 @@ BUGS (Arthur) (11/27/2016):
 
 - server wasn't terminating its receive loop properly
 	- FIXED: was an error with the loop that was reading from socket
+
+- server was running into segmentation faults with multiple simultaneous clients
+	- FIXED: problem was found in the provided garbage collector system and thread
+		forking. The forked thread did not have "running" set to true, nor
+		did it lock the mutex, so the garbage collector was terminating all
+		forked threads every time a new request came through.
+
+	- NOTE: the fix involved making the forked subroutine directly set "running"
+		and lock its own mutex, but I have to point out that the garbage
+		collector stands a good chance of either blocking the main-thread
+		while it waits on a thread to complete OR that it is heavily likely
+		to terminate threads early.
+
+		Using a separate thread that calls join() on dying threads is a
+		safer approach that avoids any potential of blocking the main
+		thread. The dying threads simply get added to a queue and then
+		signal to the cleanup thread via a condition variable to wake up
+		and clean up what's in its queue. This is implemented in the
+		MIS System's internal thread management, but I simply used the
+		professor's code for the server and client, which caused the
+		above bug.

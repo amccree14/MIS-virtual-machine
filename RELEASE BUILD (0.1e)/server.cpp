@@ -7,12 +7,13 @@
 *	- This is the professor's server implementation. It requires no
 *		adjustments, since the important part is what happens when
 *		we call c->start(), which is set by the Thread() constructor
-*		to point to the Connection class's threadMainBody() function,
-*		which I've adjusted.
+*		to create a thread that runs the Connection class's
+*		threadMainBody() function, which I've adjusted.
 ******************/
 
 #include "GarbageCollector.h"
 #include "TCPServerSocket.h"
+#include <iostream>
 
 
 int main(int argc, char** argv) 
@@ -33,6 +34,9 @@ int main(int argc, char** argv)
 		c->start(); // Start the connection thread to communicate with the client
 		garbageCollector->addConnection(c); // Add the connection to the garbage collector to be cleaned up when expired
 	}
+	
+	std::cout << "Error obtaining socket. Exiting.\n";
+	
 	delete(garbageCollector); // Delete the garbage collector
 	delete (tcpServerSocket); // Terminate and delete the TCP server socket
 	return 0;

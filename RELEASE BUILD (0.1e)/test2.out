@@ -3,34 +3,36 @@ Counter2: 4
 
 Counter: 3
 
-Counter: 2
+Counter2: 3
 
-Counter2: 
 YO THIS IS THREAD 2!
-32
+2
+Counter: 2
 
 Counter: 1
 
 	BARRIER WAITING...
 
-YO THREAD 2 PART 2!
-
 Counter2: 2
-YO THIS IS THREAD 2!
 
+YO THIS IS THREAD 2!
 1
 YO THREAD 2 PART 2!
 
-Counter2: 1
+YO THREAD 2 PART 2!
+
+Counter2: 
 YO THIS IS THREAD 2!
-0
+01
 
 YO THREAD 2 PART 2!
 
 YO THIS IS THREAD 2!
+-1
+YO THREAD 2 PART 2!
 
 	BARRIER DONE
--1This is the other part of thread set 2. 2
+This is the other part of thread set 2. 2
 This is thread set 2. 5
 TEST
 This is thread set 2. 4
@@ -41,8 +43,6 @@ This is thread set 2. 2
 TEST
 This is thread set 2. 1
 TEST
-
-YO THREAD 2 PART 2!
 This is the other part of thread set 2. 1
 BARRIER AGAIN
 BARRIER DONE

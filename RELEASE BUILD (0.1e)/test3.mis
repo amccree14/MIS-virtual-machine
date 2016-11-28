@@ -1,0 +1,55 @@
+VAR $mystring,STRING,100,"Hello world MIS:"
+VAR $counter,NUMERIC,1
+VAR $counter2, NUMERIC, 2
+VAR $char, CHAR, 'a'
+VAR $real, REAL, 10.0
+
+OUT $counter, "\n"
+DIV $counter, $real, $counter
+OUT $counter, "\n\n -"
+
+OUT $real, "\n"
+DIV $real, $counter, 5
+OUT $real, "\n\n -"
+
+JMP END1
+
+LABEL LOOP2
+ASSIGN $counter, 5
+
+LABEL LOOP
+	OUT $mystring,$counter,"!!\n"
+	SUB $counter,$counter,1
+JMPNZ LOOP,$counter
+
+OUT $counter
+
+ADD $counter, $counter2, $counter, 5, 2, 3, 1
+
+GET_STR_CHAR $mystring, 4, $char
+
+OUT $char, $counter, $mystring, "\n"
+
+SUB $counter2,$counter2,1
+LABEL END1
+OUT "\tThis is the end\n"
+JMPNZ LOOP2,$counter2
+
+SET_STR_CHAR $mystring, 4, 'P'
+
+DIV $counter, 10, 5
+DIV $real, 22, 5.2
+OUT $mystring, " | ", $counter, " ", $real
+
+ASSIGN $counter, 10
+
+
+LABEL JM
+SUB $counter, $counter, 1
+OUT $mystring, " | ", $counter, " ", $real
+
+OUT "\n\nAt JMPGT\n\n"
+JMPGTE JM, $counter, 15
+
+
+

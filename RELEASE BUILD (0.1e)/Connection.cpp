@@ -7,6 +7,20 @@
 *	- I've adjusted the threadMainBody function heavily. It now
 *		creates a .mis file and creates and runs our MIS System
 *		before sending the output files back over the network.
+*
+*	- I've also gone through and made additional lock calls and
+*		setting of 'running' to prevent the professor's garbage
+*		collector from going haywire with premature terminations.
+*
+*		Note: This garbage collector technically blocks any future
+*			thread creation if something goes wrong and a thread takes
+*			extra long to complete and setting itself to not running
+*			and before releasing its mutex. Thread cleanup is better done
+*			in a separate thread to avoid any problems with waiting
+*			on finishing threads (see the implementation used in the
+*			MIS System). The current implementation is prone to early
+*			termination or main-thread delays while waiting for threads
+*			to reach terminate-able states.
 ******************/
 
 #include <iostream>
@@ -43,6 +57,8 @@ Connection::~Connection(){if ( tcpSocket != NULL ) delete (tcpSocket);}
 
 void * Connection::threadMainBody (void * arg) 
 { // Main thread body for serving the connection
+	running = true;
+	pthread_mutex_lock(&mutex);
 	char buf[MAX_BUF_LENGTH+1]; // A buffer for holding the file name
 	memset (buf,0,MAX_BUF_LENGTH+1); // Initialize the buffer
 	int read_bytes;// = tcpSocket->readFromSocket(file_name,1023); // read from socket the file name to be fetched
@@ -233,6 +249,8 @@ void * Connection::threadMainBody (void * arg)
 	std::remove(filename.c_str());
 	
 	tcpSocket->shutDown(); // Shutdown the TCP Socket
+	pthread_mutex_unlock(&mutex);
+	running = false;
 	return NULL;
 }
 
