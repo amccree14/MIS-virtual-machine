@@ -1,0 +1,55 @@
+CHANGES (NOV 27, 2016)
+(Arthur Kung)
+-----------------------
+
+
+
+NEW FILES:
+-------------
+	- client.cpp
+	- Connection.cpp
+
+
+NEW FILES (basically unadjusted from professor)
+-----------------------------------------------
+	- TCPServerSocket.cpp
+	- TCPServerSocket.h
+	- TCPSocket.cpp
+	- TCPSocket.h
+	- GarbageCollector.cpp
+	- GarbageCollector.h
+	- Connection.h
+	- server.cpp
+	- Thread.cpp
+	- Thread.h
+
+
+======
+
+NEW FEATURES:
+-------------
+
+- Networking fully implemented, server and client model.
+	- Multi-threaded socket interface for server
+
+- NOTE: server has no exit function, it loops forever until force quit (CTRL+C, etc.)
+
+
+
+
+======
+
+TO DO (may be skipped):
+-----------------------
+
+- Serialization (still being skipped)
+
+
+
+
+============
+
+BUG FIXES:
+-----
+
+- makefile errors

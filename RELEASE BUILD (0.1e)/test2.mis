@@ -1,0 +1,68 @@
+VAR $counter3, NUMERIC, 3
+VAR $counter,NUMERIC,1
+VAR $counter2, NUMERIC, 4
+VAR $char, CHAR, 'a'
+VAR $real, REAL, 10.0
+
+
+
+THREAD_BEGIN
+	LABEL END1
+	
+	LOCK $real
+	OUT "\nCounter2: ",$counter2,"\n"
+	LOCK $real
+	UNLOCK $real
+	UNLOCK $real
+	SUB $counter2, $counter2, 1
+	
+	SLEEP 2
+	THREAD_BEGIN
+		LABEL JUSTKIDDING
+		LOCK $counter3
+		SUB $counter3, $counter3, 1
+		OUT "\nYO THIS IS THREAD 2!\n", $counter3
+		UNLOCK $counter3
+		SLEEP 2
+		OUT "\nYO THREAD 2 PART 2!\n"
+
+	THREAD_END
+	
+	JMPNZ END1, $counter2
+THREAD_END
+
+
+ASSIGN $counter, 3
+LABEL LOOP
+SLEEP 1
+LOCK $real
+OUT "\nCounter: ",$counter,"\n"
+UNLOCK $real
+SUB $counter, $counter, 1
+JMPNZ LOOP, $counter
+OUT "\n\tBARRIER WAITING...\n"
+BARRIER
+OUT "\n\tBARRIER DONE\n"
+
+ASSIGN $counter, 5
+ASSIGN $counter2, 2
+THREAD_BEGIN
+	LABEL LOOP2
+	OUT "This is thread set 2. ",$counter,"\n"
+	OUT "TEST\n"
+	SUB $counter, $counter, 1
+	JMPNZ LOOP2, $counter
+THREAD_END
+
+LABEL LOOP3
+OUT "This is the other part of thread set 2. ",$counter2,"\n"
+SUB $counter2, $counter2, 1
+SLEEP 3
+JMPNZ LOOP3, $counter2
+OUT "BARRIER AGAIN\n"
+BARRIER
+OUT "BARRIER DONE\n"
+
+
+
+

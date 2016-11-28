@@ -1,0 +1,36 @@
+CHANGES (NOV 27, 2016)
+(Arthur Kung)
+-----------------------
+
+
+
+NEW FILES:
+-------------
+	- MIS.h
+
+
+======
+
+NEW FEATURES:
+-------------
+
+- converting MIS into a dynamically-linked library of its own for use in the client and server
+- MIS is now provides a callable function, rather than a main() implementation
+- networking (client & server)
+
+
+
+
+======
+
+TO DO (may be skipped):
+-----------------------
+
+
+
+
+
+============
+
+BUG FIXES:
+-----

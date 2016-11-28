@@ -1,0 +1,27 @@
+(program completed in whole at 3:45AM, 11/10/2016)
+
+(all solved as of 9PM, 11/10/2016)
+
+
+---------------------------
+BUGS (Arthur) (11/10/2016):
+---------------------------
+
+	- program fails to parse more than one item from a string
+		- notably, this is the case for VAR creation, unsure about others
+	- program loops infinitely when parser sees \t\n\r escape codes in STRING
+
+
+
+PARSE FAILURES:
+	- VAR parse fails on STRING type when handing two parameters over
+	- VAR parse fails on NUMERIC when there is no trailing comma on the value (eh)
+
+	- anyway, in general there's something buggy going on
+
+
+
+
+NOTE: create HALT command obj. Takes no parameters, does nothing, is simply appended to the very end
+	of the commands vector, so that a LABEL created on the last line of the code will be valid
+	(even if the label will be utterly useless)

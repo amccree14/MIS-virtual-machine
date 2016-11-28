@@ -1,0 +1,3 @@
+
+g++ -std=c++11 -pthread client.cpp -o client
+g++ -std=c++11 -pthread Connection.cpp GarbageCollector.cpp server.cpp TCPServerSocket.cpp TCPSocket.cpp Thread.cpp -fmax-errors=5 -o server

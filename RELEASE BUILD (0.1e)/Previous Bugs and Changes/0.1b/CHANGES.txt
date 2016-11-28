@@ -1,0 +1,79 @@
+CHANGES - NOV 26, 2016
+(Arthur Kung)
+----------------------
+
+
+
+new variables + methods:
+------------------------
+
+V_Param.h:
+	- std::mutex m; (private)
+
+	- int lock_count = 0;
+	- unsigned int lock_id = 0;
+	- bool is_locked = false;
+
+
+	- void lock()
+	- void unlock()
+
+
+Command.h:
+	- unsigned int thread_id;
+
+
+MIS_System_Data.h:
+	- std::mutex m;
+	- unsigned int unique_thread_id = 0;
+	- std::stack<unsigned int> thread_id_stack;
+
+
+MIS_System.h:
+	- void run(unsigned int id)	 // now requires a thread ID to execute commands
+
+
+
+
+======
+
+TO DO:
+-----
+
+- warnings for...
+	- infinite loop
+		- check for trivial case of jumping to self
+		- consider: check for case of commands from label index to JMP and see if there's an escape
+			- only perform check if LABEL exists and has an index prior to JMP command
+			- only perform check for JMP command, not for JMP-conditional commands
+			- use dynamic_cast (to pointers to derived classes) to check
+				- dynamic_cast returns NULL on failed cast of pointers
+			- not infinite if there is another JMP command of any sort between label and JMP
+
+	- double locking/unlocking same variable from same thread
+	- failing to unlock a variable
+	- trying to unlock a variable that isn't locked (cannot guarantee what will happen here)
+
+- errors for...
+	- not ending threads (ie: thread_begin w/o thread_end)
+	- ending too many threads (ie: thread_end w/o thread_begin)
+	- JMP commands that jump to labels outside their threads
+
+- ignore:
+	- trying to unlock something locked from another thread
+
+-----
+
+- serialize into .miso (sent over network line-by-line or as file)
+- create execute for thread_begin, lock, unlock, and barrier
+	- note: thread_end requires no execute (throw exception) because the parser just pops the thread there
+		- UPDATE: correction, thread_end needs to call to the reaper_thread for garbage collection
+
+
+
+============
+
+BUG FIXES:
+-----
+
+- removed extra line breaks from output (std::endl was appended to every parameter in OUT, now removed)

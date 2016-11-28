@@ -1,0 +1,22 @@
+All bugs squashed by Nov 27, 2016, 1:30AM.
+
+---------------------------
+BUGS (Arthur) (11/26/2016):
+---------------------------
+
+- make lock_id take a std::thread pointer?
+	- taking an int for thread_id is a failure because the id is tied to
+		code blocks, not to actual running threads.
+- check barrier because it's terminating before nested threads finish
+	- switch to waiting on reaper thread to finish?
+		- UPDATE: reaper thread had an error on when it was noticing
+				that there were no threads left to reap and was
+				ending up in an infinite wait situation because of
+				that error.
+		- UPDATE: the barrier code was faulty because of a couple of
+				potential race situations (fixed) and the
+				infinite wait situation in the reaper thread.
+		- UPDATE: original barrier() may have had a lost wakeup problem.
+
+- segmentation faults from out-of-scope pointers and improperly initialized
+	data structures (straightforward fixes).

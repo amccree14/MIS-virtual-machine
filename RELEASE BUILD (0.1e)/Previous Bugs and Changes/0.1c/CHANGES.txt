@@ -1,0 +1,64 @@
+CHANGES (NOV 27, 2016)
+(Arthur Kung)
+-----------------------
+
+
+
+NEW FILES:
+-------------
+	- Command_DLL_Entry.cpp
+	- Command_DLL_Struct.h
+
+
+======
+
+NEW FEATURES:
+-------------
+
+- all command functions are offloaded from the program and stored in a dynamically-linked library
+	- NOTE: it's saved as a .so file, but I'm considering changing it to a .dll or .dso file
+
+- functioning thread system with creating and killing threads, as well as barrier-ing on all running threads.
+- functioning mutex lock/unlock system, supports basic recursion.
+	- NOTE: parser will not recognize recursive unlock situations and WILL consider it an error
+		if the user does not have the same number of UNLOCKs as LOCKs
+
+- unlock and lock are thread-safe
+	- LOCK will block if called from a thread that does not own the variable in question (if already locked)
+	- UNLOCK will ignore the request if called from a non-owning thread of a locked mutex
+
+
+- warning for infinite loop (for JMP only, trivial case checks)
+- errors for...
+	- not ending threads
+	- ending too many threads
+	- JMP-ing out of thread scopes
+
+- added init and quit functions for MIS_System
+	- handle initialization of data members
+	- closes output file handles
+
+
+
+
+======
+
+TO DO (may be skipped):
+-----------------------
+
+- move COMMAND class code into a .dll/.dso file and dynamically link to it
+	- COMPLETED
+
+- serialize into .miso (sent over network line-by-line or as file)
+	- NO TIME, SKIPPING
+		- unfortunate, because I really wanted to do it, too....
+
+
+
+============
+
+BUG FIXES:
+-----
+
+- new bug that caused failure of thread-cleaner system to terminate. Adjusted
+	some checks and appears to be solved for now.

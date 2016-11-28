@@ -1,0 +1,10 @@
+All bugs appear to be squashed as of Nov 27, 2016, 5:30AM
+
+---------------------------
+BUGS (Arthur) (11/27/2016):
+---------------------------
+
+- new bug in thread cleaner, causes failure to terminate
+	- appears to be caused by calling terminate when there are no running threads
+		- added a new check to avoid this problem, hopefully that's the only problem
+	- KEEP THIS PART OF THE CODE ON ALERT FOR NEW ISSUES (difficult to effectively debug)

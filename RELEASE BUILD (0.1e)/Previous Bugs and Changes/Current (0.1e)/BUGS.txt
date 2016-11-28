@@ -1,0 +1,12 @@
+All bugs squashed as of Nov 27, 2016 (9PM)
+---------------------------
+
+---------------------------
+BUGS (Arthur) (11/27/2016):
+---------------------------
+
+- client wasn't reading and storing the returned files properly
+	- FIXED: was an error with the loop that was reading from socket
+
+- server wasn't terminating its receive loop properly
+	- FIXED: was an error with the loop that was reading from socket
